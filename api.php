@@ -89,11 +89,9 @@ if ($method === 'POST') {
         fail(400, 'invalid data: expected {brigades:[], objects:[]}');
     }
 
-    // Нормализуем — храним только нужные поля верхнего уровня.
-    $clean = json_encode(
-        ['brigades' => $doc['brigades'], 'objects' => $doc['objects']],
-        JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-    );
+    // Сохраняем весь документ целиком (brigades/objects обязательны, но
+    // допускаем и другие ключи: foreman, managers, cars и т.п.).
+    $clean = json_encode($doc, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if ($clean === false) {
         fail(400, 'cannot encode data');
     }

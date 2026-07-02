@@ -9,18 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#E9EDF1;
+    /* Hide-X Design System v1.0 */
+    --bg:#F5F7FA;
     --surface:#FFFFFF;
-    --ink:#14181F;
-    --muted:#5C6772;
-    --faint:#8A949E;
-    --line:#E4E9EE;
-    --line2:#CFD7DF;
-    --chrome:#1C2530;
-    --chrome-ink:#FFFFFF;
-    --radius:16px;
-    --shadow:0 1px 2px rgba(16,24,40,.05),0 12px 32px rgba(16,24,40,.07);
-    --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --ink:#2C3E50;
+    --primary:#1E3A5F;
+    --primary-2:#152a47;
+    --link:#0099FF;
+    --accent:#FF8C42;
+    --accent-2:#e67e33;
+    --muted:#666666;
+    --faint:#999999;
+    --line:#E8E8E8;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(0,0,0,.05);
+    --shadow-hover:0 4px 12px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);
+    --font:"Inter","OpenSans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
@@ -35,20 +39,19 @@
   /* header */
   .head{display:flex;align-items:center;gap:15px;margin-bottom:8px;}
   .logo{
-    width:54px;height:54px;border-radius:14px;flex:0 0 auto;
-    background:var(--chrome);color:var(--chrome-ink);
+    width:54px;height:54px;border-radius:12px;flex:0 0 auto;
+    background:var(--primary);color:#fff;
     display:flex;align-items:center;justify-content:center;
-    font-weight:800;letter-spacing:.5px;font-size:20px;box-shadow:var(--shadow);
+    font-weight:800;letter-spacing:.5px;font-size:20px;
+    box-shadow:0 4px 12px rgba(30,58,95,.3);
   }
-  h1{font-size:26px;font-weight:800;letter-spacing:-.025em;margin:0;line-height:1.05;}
-  .tagline{font-size:13.5px;color:var(--muted);margin-top:4px;}
-  .meta{
-    display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 26px;
-  }
+  h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0;line-height:1.05;color:var(--primary);}
+  .tagline{font-size:14px;color:var(--muted);margin-top:4px;}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 26px;}
   .chip{
     display:inline-flex;align-items:center;gap:7px;background:var(--surface);
     border:1px solid var(--line);padding:7px 12px;border-radius:999px;
-    font-size:12.5px;font-weight:600;color:var(--muted);
+    font-size:13px;font-weight:600;color:var(--muted);box-shadow:var(--shadow);
   }
   .chip .d{width:8px;height:8px;border-radius:50%;}
   .chip b{font-family:var(--mono);color:var(--ink);}
@@ -59,40 +62,40 @@
   .card{
     background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
     padding:20px;display:flex;flex-direction:column;gap:14px;
-    box-shadow:0 1px 2px rgba(16,24,40,.04);text-decoration:none;color:inherit;
+    box-shadow:var(--shadow);text-decoration:none;color:inherit;
     position:relative;overflow:hidden;transition:box-shadow .15s,transform .06s,border-color .15s;
   }
   .card--live{cursor:pointer;}
-  .card--live:hover{box-shadow:var(--shadow);transform:translateY(-2px);border-color:var(--line2);}
+  .card--live:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);border-color:#D8DEE6;}
   .card--live:active{transform:translateY(0);}
   .card--soon{opacity:.92;}
-  .card:focus-visible{outline:2px solid #2563EB;outline-offset:2px;}
+  .card:focus-visible{outline:2px solid var(--link);outline-offset:2px;}
 
   .card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
   .ico{
-    width:46px;height:46px;border-radius:12px;flex:0 0 auto;
+    width:46px;height:46px;border-radius:10px;flex:0 0 auto;
     display:flex;align-items:center;justify-content:center;color:#fff;
     background:var(--c);
   }
   .ico svg{width:24px;height:24px;display:block;}
   .badge{
-    font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
     padding:4px 9px;border-radius:999px;white-space:nowrap;
   }
-  .badge--live{background:#E7F4EC;color:#15803D;}
+  .badge--live{background:#E8F5E9;color:#2E7D32;}
   .badge--soon{background:#EEF1F4;color:#6B7280;}
 
-  .card__name{font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.15;}
-  .card__desc{font-size:13px;color:var(--muted);line-height:1.5;flex:1;}
+  .card__name{font-size:18px;font-weight:700;letter-spacing:-.01em;line-height:1.15;color:var(--primary);}
+  .card__desc{font-size:14px;color:var(--muted);line-height:1.6;flex:1;}
 
   .card__foot{display:flex;align-items:center;gap:8px;margin-top:2px;}
   .open{
     display:inline-flex;align-items:center;gap:7px;
-    font-size:13px;font-weight:700;color:var(--ink);
+    font-size:14px;font-weight:700;color:var(--accent);
   }
   .open .arr{transition:transform .15s;}
   .card--live:hover .arr{transform:translateX(3px);}
-  .soon-note{font-size:12.5px;color:var(--faint);font-weight:500;}
+  .soon-note{font-size:13px;color:var(--faint);font-weight:500;}
 
   /* accent line on live cards */
   .card--live::before{
@@ -104,7 +107,7 @@
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
   @media (max-width:600px){
     .wrap{padding:28px 16px 70px;}
-    h1{font-size:22px;}
+    h1{font-size:24px;}
     .grid{grid-template-columns:1fr;}
   }
 </style>
@@ -120,14 +123,14 @@
   </div>
 
   <div class="meta">
-    <span class="chip"><span class="d" style="background:#15803D"></span>Готов <b>1</b></span>
-    <span class="chip"><span class="d" style="background:#8A949E"></span>В разработке <b>2</b></span>
+    <span class="chip"><span class="d" style="background:#2E7D32"></span>Готов <b>1</b></span>
+    <span class="chip"><span class="d" style="background:#999999"></span>В разработке <b>2</b></span>
   </div>
 
   <div class="grid">
 
     <!-- Доска бригад (рабочий) -->
-    <a class="card card--live" href="doska-brigad.html" style="--c:#2563EB">
+    <a class="card card--live" href="doska-brigad.html" style="--c:#1E3A5F">
       <div class="card__top">
         <span class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -145,7 +148,7 @@
     </a>
 
     <!-- Коммерческое предложение (скоро) -->
-    <div class="card card--soon" style="--c:#B45309">
+    <div class="card card--soon" style="--c:#FF8C42">
       <div class="card__top">
         <span class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -163,7 +166,7 @@
     </div>
 
     <!-- Смета и маржа (скоро) -->
-    <div class="card card--soon" style="--c:#15803D">
+    <div class="card card--soon" style="--c:#0099FF">
       <div class="card__top">
         <span class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
