@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Коммерческое предложение · Hide-X</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#F5F7FA;--surface:#FFFFFF;--ink:#2C3E50;
+    --primary:#1E3A5F;--primary-2:#152a47;--link:#0099FF;
+    --accent:#FF8C42;--accent-2:#e67e33;--accent-soft:#FFF3EA;
+    --muted:#666666;--faint:#999999;--line:#E8E8E8;--line2:#D8DEE6;
+    --radius:12px;--shadow:0 1px 2px rgba(0,0,0,.05);
+    --shadow-hover:0 4px 12px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);
+    --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  a{color:var(--link);text-decoration:none}
+  .wrap{max-width:900px;margin:0 auto;padding:20px 18px 120px;}
+
+  .topbar{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+  .logo{width:46px;height:46px;border-radius:12px;flex:0 0 auto;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;letter-spacing:.5px;font-size:17px;box-shadow:0 4px 12px rgba(30,58,95,.3);}
+  .topbar .t{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--primary);line-height:1.05;}
+  .topbar .s{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .topbar .back{margin-left:auto;font-size:13px;font-weight:600;}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow);}
+  .toolbar .grow{flex:1}
+  .toolbar .who{display:flex;align-items:center;gap:8px;}
+  .toolbar .who label{font-size:12px;font-weight:700;color:var(--muted);}
+  .btn{font-family:var(--font);font-size:13.5px;font-weight:700;cursor:pointer;border:1px solid var(--line2);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:10px;transition:background .12s,border-color .12s,transform .05s;display:inline-flex;align-items:center;gap:7px;}
+  .btn:hover{border-color:var(--primary);}
+  .btn:active{transform:translateY(1px);}
+  .btn--primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn--primary:hover{background:var(--accent-2);border-color:var(--accent-2);}
+  .btn--ghost{background:transparent;border-color:transparent;color:var(--muted);}
+  .btn--ghost:hover{color:var(--primary);border-color:var(--line2);}
+  .btn.sm{padding:6px 10px;font-size:12.5px;}
+
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .panel h3{margin:0 0 12px;font-size:13px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center;gap:8px;}
+  .mgr-add{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px;}
+  .mgr-add .field{flex:1;min-width:150px;}
+  .mgr-list{display:flex;flex-direction:column;gap:8px;}
+  .mgr-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#FAFBFC;}
+  .mgr-item.active{border-color:var(--accent);background:var(--accent-soft);}
+  .mgr-item .av{width:32px;height:32px;border-radius:50%;flex:0 0 auto;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+  .mgr-item .info{flex:1;min-width:0;}
+  .mgr-item .nm{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .mgr-item .ph{font-size:12px;color:var(--muted);font-family:var(--mono);}
+  .mgr-item .acts{display:flex;gap:6px;flex:0 0 auto;}
+  .mgr-empty{font-size:12.5px;color:var(--faint);padding:4px 2px;}
+  .tag-you{font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;}
+  .sec-toggles{display:flex;flex-wrap:wrap;gap:14px;}
+  .sec-toggles label{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);cursor:pointer;}
+
+  .doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:34px 36px;}
+  .doc__head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;padding-bottom:18px;border-bottom:2px solid var(--primary);}
+  .company{display:flex;gap:14px;align-items:flex-start;}
+  .company .mark{width:52px;height:52px;border-radius:12px;flex:0 0 auto;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;letter-spacing:.5px;}
+  .company .cname{font-size:22px;font-weight:800;color:var(--primary);letter-spacing:-.02em;line-height:1;}
+  .company .ctag{font-size:12px;color:var(--muted);margin-top:5px;max-width:300px;line-height:1.4;}
+  .company .cinfo{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;}
+  .docmeta{text-align:right;flex:0 0 auto;}
+  .docmeta .h{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+  .docmeta .row{font-size:12.5px;color:var(--muted);margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center;}
+  .docmeta .row label{color:var(--faint);}
+
+  .f{font-family:var(--font);font-size:13px;color:var(--ink);background:#FAFBFC;border:1px solid var(--line);border-radius:8px;padding:7px 9px;width:100%;}
+  .f:focus{outline:none;border-color:var(--link);background:#fff;box-shadow:0 0 0 3px rgba(0,153,255,.12);}
+  .f.mini{padding:5px 8px;font-size:12.5px;}
+  .f.right{text-align:right;}
+  select.f{appearance:auto;}
+  input.f::-webkit-outer-spin-button,input.f::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+
+  /* editable rich text in the document */
+  [contenteditable]{outline:none;}
+  [contenteditable]:hover{background:rgba(0,153,255,.04);border-radius:4px;}
+  [contenteditable]:focus{background:rgba(0,153,255,.07);border-radius:4px;box-shadow:0 0 0 3px rgba(0,153,255,.10);}
+
+  .parties{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin:20px 0 8px;}
+  .field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);margin-bottom:5px;}
+
+  /* selling sections */
+  .sec{margin-top:24px;}
+  .sec-h{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary);margin:0 0 12px;}
+  .offer{margin-top:20px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;}
+  .offer .lead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-2);margin-bottom:5px;}
+  .offer .txt{font-size:17px;font-weight:700;color:var(--ink);line-height:1.35;letter-spacing:-.01em;}
+  .adv{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
+  .adv .it{display:flex;gap:11px;align-items:flex-start;}
+  .adv .chk{width:24px;height:24px;border-radius:50%;flex:0 0 auto;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin-top:1px;}
+  .adv .it .tx{font-size:13.5px;line-height:1.45;color:var(--ink);}
+  .benefits ul{margin:0;padding-left:0;list-style:none;}
+  .benefits li{position:relative;padding-left:22px;margin-bottom:9px;font-size:13.5px;line-height:1.5;color:var(--ink);}
+  .benefits li::before{content:"→";position:absolute;left:0;top:0;color:var(--accent);font-weight:800;}
+  .stages{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .stages .st{border:1px solid var(--line);border-radius:10px;padding:13px 12px;background:#FAFBFC;}
+  .stages .n{width:26px;height:26px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;margin-bottom:9px;}
+  .stages .st .tt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;}
+  .stages .st .ds{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.35;}
+  .special{background:var(--primary);color:#fff;border-radius:12px;padding:18px 20px;}
+  .special .lead{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:6px;}
+  .special .txt{font-size:14px;line-height:1.5;color:#EAF0F6;}
+  .special .cta{margin-top:12px;font-size:15px;font-weight:700;color:#fff;border-top:1px solid rgba(255,255,255,.18);padding-top:12px;}
+
+  table.items{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;}
+  table.items th{background:var(--primary);color:#fff;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;padding:9px 8px;text-align:left;}
+  table.items th.money,table.items th.qty{text-align:right;}
+  table.items td{border-bottom:1px solid var(--line);padding:5px 6px;vertical-align:middle;}
+  table.items tr:last-child td{border-bottom:none;}
+  td.idx{color:var(--faint);font-family:var(--mono);font-size:12px;text-align:center;width:30px;}
+  td.sum{font-family:var(--mono);font-weight:600;text-align:right;white-space:nowrap;width:120px;}
+  .colw-unit{width:96px;} .colw-qty{width:78px;} .colw-price{width:120px;}
+  .rm{border:none;background:transparent;color:var(--faint);cursor:pointer;font-size:17px;line-height:1;padding:2px 6px;border-radius:6px;}
+  .rm:hover{color:#DC2626;background:#FEF2F2;}
+  .addrow{margin-top:10px;}
+
+  .totals{margin-top:18px;margin-left:auto;width:360px;max-width:100%;}
+  .totals .tr{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13.5px;}
+  .totals .tr label{color:var(--muted);}
+  .totals .tr .v{font-family:var(--mono);font-weight:600;}
+  .totals .tr.sep{border-top:1px solid var(--line);margin-top:4px;padding-top:10px;}
+  .totals .tr.grand{border-top:2px solid var(--primary);margin-top:6px;padding-top:12px;font-size:16px;font-weight:800;}
+  .totals .tr.grand .v{color:var(--accent);font-size:18px;}
+  .totals .inl{display:inline-flex;align-items:center;gap:6px;}
+  .totals .pct{width:64px;}
+  .words{font-size:12.5px;color:var(--muted);margin-top:8px;font-style:italic;}
+
+  .terms{margin-top:26px;}
+  .terms h3{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary);margin:0 0 8px;}
+  textarea.f{resize:vertical;min-height:78px;line-height:1.55;}
+  .terms-body{min-height:64px;line-height:1.6;}
+
+  /* photo galleries */
+  .dropzone{border:1.5px dashed var(--line2);border-radius:10px;padding:14px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;background:#FAFBFC;transition:border-color .12s,background .12s,color .12s;margin-bottom:10px;}
+  .dropzone:hover,.dropzone.drag{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-2);}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:2px;}
+  .gallery.two{grid-template-columns:repeat(2,1fr);}
+  .gallery:empty{display:none;}
+  .ph-card{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#FAFBFC;break-inside:avoid;}
+  .ph-imgwrap{position:relative;}
+  .ph-imgwrap img{width:100%;height:auto;display:block;}
+  .ph-rm{position:absolute;top:6px;right:6px;border:none;background:rgba(0,0,0,.55);color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1;}
+  .ph-rm:hover{background:#DC2626;}
+  .ph-cap{font-size:12px;color:var(--muted);padding:7px 9px;min-height:14px;line-height:1.4;outline:none;}
+  .ph-cap:empty::before{content:"Подпись к фото…";color:var(--faint);}
+
+  .hint{font-size:12px;color:var(--faint);margin-top:14px;text-align:center;}
+
+  @media (max-width:680px){
+    .doc{padding:22px 16px;}
+    .doc__head{flex-direction:column;}
+    .docmeta{text-align:left;} .docmeta .row{justify-content:flex-start;}
+    .parties{grid-template-columns:1fr;}
+    .adv{grid-template-columns:1fr;}
+    .stages{grid-template-columns:1fr 1fr;}
+    .totals{width:100%;}
+  }
+
+  /* clean look for PDF export & print */
+  body.export .no-print,body.export .sec-hide{display:none !important;}
+  body.export .wrap{max-width:none;padding:0;}
+  body.export .doc{border:none;border-radius:0;box-shadow:none;padding:0;}
+  body.export .f{border-color:transparent !important;background:transparent !important;box-shadow:none !important;padding:2px 0 !important;}
+  body.export select.f{appearance:none;-webkit-appearance:none;}
+  body.export textarea.f{min-height:0;}
+  body.export [contenteditable]:hover,body.export [contenteditable]:focus{background:transparent !important;box-shadow:none !important;}
+  body.export .rm,body.export .addrow{display:none !important;}
+  body.export .stages .st,body.export .offer,body.export .special{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+  /* off-screen clone used for PDF generation */
+  .pdfexport{width:794px;background:#fff;padding:32px 34px;}
+  .pdfexport .no-print,.pdfexport .sec-hide{display:none !important;}
+  .pdfexport .doc{border:none !important;border-radius:0 !important;box-shadow:none !important;padding:0 !important;}
+  .pdfexport .f{border-color:transparent !important;background:transparent !important;box-shadow:none !important;padding:2px 0 !important;}
+  .pdfexport select.f{appearance:none;-webkit-appearance:none;}
+  .pdfexport [contenteditable]:hover,.pdfexport [contenteditable]:focus{background:transparent !important;box-shadow:none !important;}
+  .pdfexport .rm,.pdfexport .addrow{display:none !important;}
+  .pdfexport .ph-cap:empty{display:none !important;}
+  .pdfexport .empty-gal{display:none !important;}
+  .pdfexport .terms-body{min-height:0;}
+
+  @media print{
+    @page{size:A4;margin:14mm;}
+    body{background:#fff;}
+    .wrap{max-width:none;padding:0;}
+    .no-print,.sec-hide{display:none !important;}
+    .doc{border:none;border-radius:0;box-shadow:none;padding:0;}
+    .f{border-color:transparent !important;background:transparent !important;box-shadow:none !important;padding:2px 0 !important;}
+    select.f{appearance:none;-webkit-appearance:none;}
+    textarea.f{min-height:0;}
+    [contenteditable]:hover,[contenteditable]:focus{background:transparent !important;box-shadow:none !important;}
+    table.items th,.offer,.special,.stages .st,.adv .chk,.benefits li::before,.ph-card{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .rm,.addrow{display:none !important;}
+    .ph-cap:empty{display:none !important;}
+    .empty-gal{display:none !important;}
+    .terms-body{min-height:0;}
+    .sec{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Top bar -->
+  <div class="topbar no-print">
+    <div class="logo">HX</div>
+    <div>
+      <div class="t">Коммерческое предложение</div>
+      <div class="s">Соберите КП по объекту и скачайте PDF для клиента</div>
+    </div>
+    <a class="back" href="index.html">← На портал</a>
+  </div>
+
+  <!-- Managers panel -->
+  <div class="panel no-print" id="mgrPanel" style="display:none">
+    <h3>👤 Менеджеры</h3>
+    <div class="mgr-add">
+      <div class="field"><label>Имя и фамилия</label><input class="f" id="mgrName" placeholder="напр. Еремеев Михаил"></div>
+      <div class="field"><label>Телефон</label><input class="f" id="mgrPhone" placeholder="+7 ___ ___-__-__"></div>
+      <button class="btn btn--primary" id="mgrAdd">＋ Добавить</button>
+    </div>
+    <div class="mgr-list" id="mgrList"></div>
+  </div>
+
+  <!-- Sections panel -->
+  <div class="panel no-print" id="secPanel" style="display:none">
+    <h3>🧩 Блоки КП <span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--faint);font-size:12px">— что показывать в документе</span></h3>
+    <div class="sec-toggles" id="secToggles"></div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar no-print">
+    <div class="who">
+      <label>Кто вы?</label>
+      <select class="f mini" id="mgrSelect" style="width:190px"></select>
+    </div>
+    <button class="btn sm" id="btnMgrs">👤 Менеджеры</button>
+    <button class="btn sm" id="btnSecs">🧩 Блоки</button>
+    <div class="grow"></div>
+    <span id="savedNote" style="font-size:12px;color:var(--faint)"></span>
+    <button class="btn" id="btnExample">Пример</button>
+    <button class="btn btn--ghost" id="btnClear">Очистить</button>
+    <button class="btn btn--primary" id="btnPdf">⬇ Скачать PDF</button>
+  </div>
+
+  <!-- Document -->
+  <div class="doc" id="doc">
+    <div class="doc__head">
+      <div class="company">
+        <div class="mark">HX</div>
+        <div>
+          <div class="cname">Hide-X</div>
+          <div class="ctag" contenteditable="true" data-k="ctag">Напыляемая теплоизоляция ППУ · полимочевина · гидроизоляция кровли и полов</div>
+          <div class="cinfo" contenteditable="true" data-k="cinfo">Тел.: +7 (___) ___-__-__ · e-mail: info@hide-x.ru<br>Сайт: hide-x.ru · ИНН/реквизиты: ___</div>
+        </div>
+      </div>
+      <div class="docmeta">
+        <div class="h">КП № <span contenteditable="true" data-k="kpno" style="border-bottom:1px dashed var(--line2)">—</span></div>
+        <div class="row"><label>от</label> <input type="date" class="f mini" id="fDate" data-k="date" style="width:150px"></div>
+        <div class="row"><label>действует до</label> <input type="date" class="f mini" id="fValid" data-k="valid" style="width:150px"></div>
+      </div>
+    </div>
+
+    <!-- Offer hero -->
+    <div class="offer" data-sec="offer">
+      <div class="lead">Наше предложение</div>
+      <div class="txt" contenteditable="true" data-k="offer">Тёплая кровля без швов и мостиков холода — смонтируем за 2–3 дня, с гарантией 12 месяцев и фиксированной ценой.</div>
+    </div>
+
+    <!-- Advantages -->
+    <div class="sec" data-sec="adv">
+      <h3 class="sec-h">Почему Hide-X</h3>
+      <div class="adv">
+        <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv1"><b>Гарантия 12 месяцев</b> на все выполненные работы</div></div>
+        <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv2"><b>Профессиональное оборудование</b> высокого давления — стабильное качество слоя</div></div>
+        <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv3"><b>Более 100 000 м² выполнено</b> — опыт на объектах любой сложности</div></div>
+        <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv4"><b>Сертифицированные материалы</b>, бесплатный выезд и замер</div></div>
+      </div>
+    </div>
+
+    <!-- Parties -->
+    <div class="parties">
+      <div class="field"><label>Клиент</label><input class="f" data-k="client" placeholder="ООО «Ромашка» / Иванов И.И."></div>
+      <div class="field"><label>Контакт / телефон клиента</label><input class="f" data-k="clientContact" placeholder="+7 ___ ___-__-__"></div>
+      <div class="field"><label>Объект / адрес</label><input class="f" data-k="object" placeholder="напр. Склад, г. Домодедово"></div>
+      <div class="field"><label>Менеджер</label><input class="f" data-k="manager" placeholder="выберите себя вверху или введите имя"></div>
+      <div class="field"><label>Телефон менеджера</label><input class="f" data-k="managerPhone" placeholder="+7 ___ ___-__-__"></div>
+    </div>
+
+    <!-- Benefits + technology -->
+    <div class="sec benefits" data-sec="benefits">
+      <h3 class="sec-h">Что вы получаете</h3>
+      <ul contenteditable="true" data-k="benefits">
+        <li>Экономия до 40% на отоплении — бесшовный тёплый контур без мостиков холода.</li>
+        <li>Полимочевина: гидроизоляция со сроком службы 25+ лет, готова к нагрузке уже через час.</li>
+        <li>Скорость: объект 500–1000 м² закрываем за 1–3 дня, без простоя вашего производства.</li>
+        <li>Один подрядчик на утепление и гидроизоляцию — единая гарантия и ответственность.</li>
+      </ul>
+    </div>
+
+    <!-- Items -->
+    <table class="items">
+      <thead>
+        <tr>
+          <th style="width:30px">№</th>
+          <th>Наименование работ / материалов</th>
+          <th class="colw-unit">Ед.</th>
+          <th class="qty colw-qty">Кол-во</th>
+          <th class="money colw-price">Цена, ₽</th>
+          <th class="money" style="width:120px">Сумма, ₽</th>
+          <th class="no-print" style="width:30px"></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <button class="btn addrow no-print" id="btnAdd2">＋ Добавить строку</button>
+
+    <datalist id="workList">
+      <option value="ППУ напыление кровли"></option>
+      <option value="ППУ утепление стен"></option>
+      <option value="ППУ утепление пола"></option>
+      <option value="Полимочевина, кровля"></option>
+      <option value="Полимочевина, пол"></option>
+      <option value="Гидроизоляция, полимочевина"></option>
+      <option value="Полимочевина + Поропрайм"></option>
+      <option value="Материал ППУ (компоненты А+Б)"></option>
+      <option value="Материал полимочевина"></option>
+      <option value="Грунтовка / праймер"></option>
+      <option value="Подготовка основания"></option>
+      <option value="Аренда оборудования"></option>
+      <option value="Доставка / логистика"></option>
+    </datalist>
+
+    <div class="totals">
+      <div class="tr"><label>Итого по позициям</label><span class="v" id="tSub">0 ₽</span></div>
+      <div class="tr">
+        <label class="inl">Скидка <input class="f mini right pct" id="tDisc" type="number" min="0" max="100" step="0.5" value="0">%</label>
+        <span class="v" id="tDiscV">0 ₽</span>
+      </div>
+      <div class="tr sep">
+        <label class="inl"><input type="checkbox" id="tVatOn"> НДС <input class="f mini right pct" id="tVat" type="number" min="0" max="30" step="1" value="20">%</label>
+        <span class="v" id="tVatV">0 ₽</span>
+      </div>
+      <div class="tr grand"><label>К оплате</label><span class="v" id="tTotal">0 ₽</span></div>
+      <div class="words" id="tWords"></div>
+    </div>
+
+    <!-- Stages -->
+    <div class="sec" data-sec="stages">
+      <h3 class="sec-h">Как мы работаем</h3>
+      <div class="stages">
+        <div class="st"><div class="n">1</div><div class="tt" contenteditable="true" data-k="st1t">Выезд и замер</div><div class="ds" contenteditable="true" data-k="st1d">Бесплатно, в удобное время</div></div>
+        <div class="st"><div class="n">2</div><div class="tt" contenteditable="true" data-k="st2t">Подготовка основания</div><div class="ds" contenteditable="true" data-k="st2d">Очистка, праймер, укрытие</div></div>
+        <div class="st"><div class="n">3</div><div class="tt" contenteditable="true" data-k="st3t">Напыление</div><div class="ds" contenteditable="true" data-k="st3d">ППУ / полимочевина по слоям</div></div>
+        <div class="st"><div class="n">4</div><div class="tt" contenteditable="true" data-k="st4t">Контроль и сдача</div><div class="ds" contenteditable="true" data-k="st4d">Замер толщины, гарантийный акт</div></div>
+      </div>
+    </div>
+
+    <!-- Special offer + CTA -->
+    <div class="sec special" data-sec="special">
+      <div class="lead">Спецпредложение</div>
+      <div class="txt" contenteditable="true" data-k="special">Цена в этом предложении зафиксирована до даты «действует до». При заключении договора в этот срок — выезд замерщика и подготовка сметы бесплатно.</div>
+      <div class="cta" contenteditable="true" data-k="cta">Готовы начать? Позвоните: +7 (___) ___-__-__ · info@hide-x.ru</div>
+    </div>
+
+    <!-- Conditions -->
+    <div class="terms">
+      <h3>Условия</h3>
+      <div class="f terms-body" contenteditable="true" data-k="terms">• Срок действия предложения: 14 календарных дней.<br>• Условия оплаты: предоплата 50%, остаток по факту выполнения работ.<br>• Сроки выполнения согласовываются после осмотра объекта.<br>• Гарантия на выполненные работы — 12 месяцев.</div>
+    </div>
+
+    <!-- Object photos (в конце) -->
+    <div class="sec" data-sec="objphoto">
+      <h3 class="sec-h">Фото объекта</h3>
+      <div class="dropzone no-print" id="dropObj">📷 Нажмите или перетащите фото объекта клиента (замер / «до»)</div>
+      <input type="file" id="fileObj" accept="image/*" multiple hidden>
+      <div class="gallery two" id="galObj"></div>
+    </div>
+
+    <!-- Our works gallery (в конце) -->
+    <div class="sec" data-sec="works">
+      <h3 class="sec-h">Наши работы</h3>
+      <div class="dropzone no-print" id="dropWorks">📷 Нажмите или перетащите фото реализованных объектов (2–6 шт.)</div>
+      <input type="file" id="fileWorks" accept="image/*" multiple hidden>
+      <div class="gallery" id="galWorks"></div>
+    </div>
+  </div>
+
+  <div class="hint no-print">Заполненное, список менеджеров и выбор блоков сохраняются в этом браузере. Кнопка «Скачать PDF» сразу скачивает готовый файл — без печати.</div>
+</div>
+
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const STORE="hidex_kp_draft_v1";
+const MGRS="hidex_kp_managers_v1";
+const UNITS=["м²","м³","пог.м","шт","компл.","услуга","ед.","т","кг","л","час","смена"];
+const SECTIONS=[{k:"offer",n:"Оффер в шапке"},{k:"adv",n:"Преимущества"},{k:"objphoto",n:"Фото объекта"},{k:"benefits",n:"Что вы получаете"},{k:"stages",n:"Этапы работ"},{k:"works",n:"Наши работы"},{k:"special",n:"Спецпредложение + призыв"}];
+const rowsEl=$("#rows");
+const fmt=n=>{n=Math.round((Number(n)||0)*100)/100;return n.toLocaleString("ru-RU",{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2})+" ₽";};
+
+/* ---------- rows ---------- */
+function unitSelectHTML(){return '<select class="f mini" data-c="unit">'+UNITS.map(u=>`<option value="${u}">${u}</option>`).join('')+'</select>';}
+function addRow(d={}){
+  const tr=document.createElement("tr");
+  tr.innerHTML='<td class="idx"></td>'+
+    '<td><input class="f mini" data-c="name" list="workList" placeholder="Работа или материал"></td>'+
+    '<td>'+unitSelectHTML()+'</td>'+
+    '<td><input class="f mini right" data-c="qty" type="number" min="0" step="any" placeholder="0"></td>'+
+    '<td><input class="f mini right" data-c="price" type="number" min="0" step="any" placeholder="0"></td>'+
+    '<td class="sum" data-c="sum">0 ₽</td>'+
+    '<td class="no-print"><button class="rm" title="Удалить строку">×</button></td>';
+  rowsEl.appendChild(tr);
+  tr.querySelector('[data-c=name]').value=d.name||"";
+  const us=tr.querySelector('[data-c=unit]');
+  let uv=d.unit!=null&&d.unit!==""?d.unit:"м²";
+  if(![...us.options].some(o=>o.value===uv))us.add(new Option(uv,uv),0);
+  us.value=uv;
+  if(d.qty!=null)tr.querySelector('[data-c=qty]').value=d.qty;
+  if(d.price!=null)tr.querySelector('[data-c=price]').value=d.price;
+  tr.querySelector('.rm').addEventListener('click',()=>{tr.remove();if(!rowsEl.children.length)addRow();recalc();save();});
+  return tr;
+}
+function recalc(){
+  let sub=0;
+  $$("#rows tr").forEach((tr,i)=>{
+    tr.querySelector('.idx').textContent=i+1;
+    const q=Number(tr.querySelector('[data-c=qty]').value)||0;
+    const p=Number(tr.querySelector('[data-c=price]').value)||0;
+    const s=q*p; sub+=s;
+    tr.querySelector('[data-c=sum]').textContent=fmt(s);
+  });
+  const discPct=Number($("#tDisc").value)||0;
+  const discV=sub*discPct/100;
+  const afterDisc=sub-discV;
+  const vatOn=$("#tVatOn").checked;
+  const vatV=vatOn?afterDisc*(Number($("#tVat").value)||0)/100:0;
+  const total=afterDisc+vatV;
+  $("#tSub").textContent=fmt(sub);
+  $("#tDiscV").textContent="−"+fmt(discV);
+  $("#tVatV").textContent=(vatOn?"+":"")+fmt(vatV);
+  $("#tTotal").textContent=fmt(total);
+  $("#tWords").textContent=total>0?("Сумма прописью: "+rublesToWords(total)):"";
+}
+
+/* ---------- rubles in words ---------- */
+function rublesToWords(amount){
+  amount=Math.round(amount*100)/100;
+  let rub=Math.floor(amount),kop=Math.round((amount-rub)*100);
+  const words=intToWords(rub,["рубль","рубля","рублей"],false);
+  const kopStr=(kop<10?"0"+kop:""+kop)+" "+plural(kop,["копейка","копейки","копеек"]);
+  return cap(rub===0?"ноль рублей":words)+" "+kopStr;
+}
+function plural(n,forms){n=Math.abs(n)%100;const n1=n%10;if(n>10&&n<20)return forms[2];if(n1>1&&n1<5)return forms[1];if(n1===1)return forms[0];return forms[2];}
+function intToWords(num,curForms,femaleUnits){
+  if(num===0)return "ноль "+curForms[2];
+  const ones=["","один","два","три","четыре","пять","шесть","семь","восемь","девять","десять","одиннадцать","двенадцать","тринадцать","четырнадцать","пятнадцать","шестнадцать","семнадцать","восемнадцать","девятнадцать"];
+  const onesF=["","одна","две","три","четыре","пять","шесть","семь","восемь","девять","десять","одиннадцать","двенадцать","тринадцать","четырнадцать","пятнадцать","шестнадцать","семнадцать","восемнадцать","девятнадцать"];
+  const tens=["","","двадцать","тридцать","сорок","пятьдесят","шестьдесят","семьдесят","восемьдесят","девяносто"];
+  const hund=["","сто","двести","триста","четыреста","пятьсот","шестьсот","семьсот","восемьсот","девятьсот"];
+  function triad(n,female){let r=[];r.push(hund[Math.floor(n/100)]);const t=n%100;if(t<20){r.push((female?onesF:ones)[t]);}else{r.push(tens[Math.floor(t/10)]);r.push((female?onesF:ones)[t%10]);}return r.filter(Boolean).join(" ");}
+  const groups=[{f:["тысяча","тысячи","тысяч"],female:true},{f:["миллион","миллиона","миллионов"],female:false},{f:["миллиард","миллиарда","миллиардов"],female:false}];
+  let parts=[],rest=num;const chunks=[];
+  while(rest>0){chunks.push(rest%1000);rest=Math.floor(rest/1000);}
+  for(let i=chunks.length-1;i>=0;i--){const c=chunks[i];if(c===0)continue;if(i===0){parts.push(triad(c,femaleUnits));parts.push(plural(c,curForms));}else{const gr=groups[i-1];parts.push(triad(c,gr.female));parts.push(plural(c,gr.f));}}
+  return parts.filter(Boolean).join(" ");
+}
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+
+/* ---------- sections visibility ---------- */
+let sections={};
+function renderSecToggles(){
+  const box=$("#secToggles");
+  box.innerHTML=SECTIONS.map(s=>`<label><input type="checkbox" data-sec-chk="${s.k}" ${sections[s.k]===false?"":"checked"}> ${s.n}</label>`).join("");
+  $$("[data-sec-chk]",box).forEach(chk=>chk.addEventListener('change',()=>{
+    sections[chk.dataset.secChk]=chk.checked;applySections();save();
+  }));
+}
+function applySections(){
+  SECTIONS.forEach(s=>{
+    const el=document.querySelector('[data-sec="'+s.k+'"]');
+    if(el)el.style.display=(sections[s.k]===false)?"none":"";
+  });
+}
+
+/* ---------- managers ---------- */
+let managers=[],currentMgr=null;
+function loadMgrs(){try{managers=JSON.parse(localStorage.getItem(MGRS))||[];}catch(e){managers=[];}}
+function saveMgrs(){try{localStorage.setItem(MGRS,JSON.stringify(managers));}catch(e){}}
+function initials(name){return (name||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";}
+function renderMgrs(){
+  const sel=$("#mgrSelect");
+  sel.innerHTML='<option value="">— выберите себя —</option>'+managers.map(m=>`<option value="${m.id}">${escapeHtml(m.name)}</option>`).join('');
+  if(currentMgr)sel.value=currentMgr;
+  const list=$("#mgrList");
+  if(!managers.length){list.innerHTML='<div class="mgr-empty">Пока нет менеджеров. Добавьте первого выше.</div>';return;}
+  list.innerHTML="";
+  managers.forEach(m=>{
+    const el=document.createElement('div');
+    el.className='mgr-item'+(m.id===currentMgr?' active':'');
+    el.innerHTML=`<div class="av">${escapeHtml(initials(m.name))}</div>`+
+      `<div class="info"><div class="nm">${escapeHtml(m.name)} ${m.id===currentMgr?'<span class="tag-you">это я</span>':''}</div>`+
+      `<div class="ph">${escapeHtml(m.phone||"—")}</div></div>`+
+      `<div class="acts"><button class="btn sm" data-act="pick">Это я</button>`+
+      `<button class="btn sm btn--ghost" data-act="edit">✎</button>`+
+      `<button class="btn sm btn--ghost" data-act="del">×</button></div>`;
+    el.querySelector('[data-act=pick]').onclick=()=>selectMgr(m.id);
+    el.querySelector('[data-act=edit]').onclick=()=>{$("#mgrName").value=m.name;$("#mgrPhone").value=m.phone||"";managers=managers.filter(x=>x.id!==m.id);saveMgrs();renderMgrs();$("#mgrName").focus();};
+    el.querySelector('[data-act=del]').onclick=()=>{if(!confirm("Удалить менеджера «"+m.name+"»?"))return;managers=managers.filter(x=>x.id!==m.id);if(currentMgr===m.id)currentMgr=null;saveMgrs();renderMgrs();};
+    list.appendChild(el);
+  });
+}
+function addMgr(){
+  const name=$("#mgrName").value.trim(),phone=$("#mgrPhone").value.trim();
+  if(!name){$("#mgrName").focus();return;}
+  managers.push({id:"m"+Date.now().toString(36)+Math.floor(Math.random()*1000),name,phone});
+  saveMgrs();$("#mgrName").value="";$("#mgrPhone").value="";renderMgrs();$("#mgrName").focus();
+}
+function selectMgr(id){
+  const m=managers.find(x=>x.id===id);if(!m)return;
+  currentMgr=id;$('[data-k=manager]').value=m.name;$('[data-k=managerPhone]').value=m.phone||"";
+  renderMgrs();save();
+}
+function escapeHtml(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+/* ---------- photo galleries ---------- */
+const GALS={works:{grid:"#galWorks",sec:"works"},obj:{grid:"#galObj",sec:"objphoto"}};
+let quotaWarned=false;
+function compressImage(file,maxW,q,aspect){
+  return new Promise((res,rej)=>{
+    const rd=new FileReader();
+    rd.onload=()=>{const img=new Image();img.onload=()=>{
+      let sw=img.width,sh=img.height,sx=0,sy=0;
+      if(aspect){ // центр-кроп под нужную пропорцию, без искажения
+        const a=sw/sh;
+        if(a>aspect){const nw=Math.round(sh*aspect);sx=Math.round((sw-nw)/2);sw=nw;}
+        else{const nh=Math.round(sw/aspect);sy=Math.round((sh-nh)/2);sh=nh;}
+      }
+      let dw=sw,dh=sh;
+      if(dw>maxW){dh=Math.round(dh*maxW/dw);dw=maxW;}
+      const c=document.createElement('canvas');c.width=dw;c.height=dh;
+      const ctx=c.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,dw,dh);
+      ctx.drawImage(img,sx,sy,sw,sh,0,0,dw,dh);
+      res(c.toDataURL('image/jpeg',q));
+    };img.onerror=rej;img.src=rd.result;};
+    rd.onerror=rej;rd.readAsDataURL(file);
+  });
+}
+function addPhotoCard(gal,src,cap){
+  const wrap=$(GALS[gal].grid);
+  const card=document.createElement('div');card.className='ph-card';
+  card.innerHTML='<div class="ph-imgwrap"><img alt=""><button class="ph-rm no-print" title="Удалить">×</button></div><div class="ph-cap" contenteditable="true"></div>';
+  card.querySelector('img').src=src;
+  card.querySelector('.ph-cap').textContent=cap||"";
+  card.querySelector('.ph-rm').onclick=()=>{card.remove();markGal(gal);save();};
+  card.querySelector('.ph-cap').addEventListener('input',save);
+  wrap.appendChild(card);
+}
+function markGal(gal){
+  const sec=document.querySelector('[data-sec="'+GALS[gal].sec+'"]');
+  if(sec)sec.classList.toggle('empty-gal',$(GALS[gal].grid).children.length===0);
+}
+async function handleFiles(gal,files){
+  for(const f of [...files]){
+    if(!/^image\//.test(f.type))continue;
+    try{const src=await compressImage(f,1000,0.75,4/3);addPhotoCard(gal,src,"");}catch(e){}
+  }
+  markGal(gal);save();
+}
+function readGal(gal){
+  return $$(GALS[gal].grid+' .ph-card').map(c=>({src:c.querySelector('img').src,cap:c.querySelector('.ph-cap').textContent||""}));
+}
+function wireDrop(gal,dropSel,inputSel){
+  const dz=$(dropSel),inp=$(inputSel);
+  dz.addEventListener('click',()=>inp.click());
+  inp.addEventListener('change',()=>{handleFiles(gal,inp.files);inp.value="";});
+  ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag');}));
+  ['dragleave','dragend'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag');}));
+  dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer&&e.dataTransfer.files)handleFiles(gal,e.dataTransfer.files);});
+}
+
+/* ---------- persistence ---------- */
+function collect(){
+  const d={fields:{},rows:[],disc:$("#tDisc").value,vatOn:$("#tVatOn").checked,vat:$("#tVat").value,mgr:currentMgr,sections:sections,photos:{works:readGal("works"),obj:readGal("obj")}};
+  $$("[data-k]").forEach(el=>{const k=el.dataset.k;d.fields[k]=(el.tagName==="INPUT"||el.tagName==="TEXTAREA")?el.value:el.innerHTML;});
+  $$("#rows tr").forEach(tr=>{d.rows.push({name:tr.querySelector('[data-c=name]').value,unit:tr.querySelector('[data-c=unit]').value,qty:tr.querySelector('[data-c=qty]').value,price:tr.querySelector('[data-c=price]').value});});
+  return d;
+}
+let saveT=null;
+function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(STORE,JSON.stringify(collect()));const n=$("#savedNote");n.textContent="✓ сохранено";setTimeout(()=>{if(n.textContent==="✓ сохранено")n.textContent="";},1200);}catch(e){if(!quotaWarned){quotaWarned=true;alert("Фото занимают слишком много места в браузере — часть данных может не сохраниться. Уменьшите количество или размер фотографий.");}}},300);}
+function apply(d){
+  if(!d)return false;
+  $$("[data-k]").forEach(el=>{const k=el.dataset.k;if(d.fields&&d.fields[k]!=null){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.value=d.fields[k];else el.innerHTML=d.fields[k];}});
+  if(d.disc!=null)$("#tDisc").value=d.disc;
+  if(d.vat!=null)$("#tVat").value=d.vat;
+  $("#tVatOn").checked=!!d.vatOn;
+  currentMgr=d.mgr||null;
+  sections=d.sections||{};
+  rowsEl.innerHTML="";(d.rows&&d.rows.length?d.rows:[{}]).forEach(r=>addRow(r));
+  ["works","obj"].forEach(gal=>{$(GALS[gal].grid).innerHTML="";((d.photos&&d.photos[gal])||[]).forEach(p=>addPhotoCard(gal,p.src,p.cap));markGal(gal);});
+  return true;
+}
+
+/* ---------- defaults / example ---------- */
+function todayISO(){const t=new Date();return t.toISOString().slice(0,10);}
+function plusDaysISO(n){const t=new Date();t.setDate(t.getDate()+n);return t.toISOString().slice(0,10);}
+function setDefaults(){
+  $("#fDate").value=todayISO();$("#fValid").value=plusDaysISO(14);
+  $('[data-k=kpno]').textContent=new Date().toISOString().slice(0,10).replace(/-/g,"");
+  rowsEl.innerHTML="";addRow({});addRow({});
+}
+function loadExample(){
+  apply({
+    fields:{
+      kpno:new Date().toISOString().slice(0,10).replace(/-/g,""),date:todayISO(),valid:plusDaysISO(14),
+      client:"ООО «Ромашка»",clientContact:"+7 926 123-45-67",
+      object:"Склад, г. Домодедово, ул. Промышленная 5",
+      manager:managers[0]?managers[0].name:"Еремеев Михаил",
+      managerPhone:managers[0]?(managers[0].phone||""):"+7 900 111-22-33",
+      terms:"• Срок действия предложения: 14 календарных дней.<br>• Условия оплаты: предоплата 50%, остаток по факту.<br>• Сроки: 5 рабочих дней после согласования.<br>• Гарантия на работы — 12 месяцев."
+    },
+    disc:"5",vatOn:false,vat:"20",mgr:managers[0]?managers[0].id:null,sections:sections,
+    rows:[
+      {name:"ППУ напыление кровли",unit:"м²",qty:"850",price:"1200"},
+      {name:"Полимочевина, гидроизоляция",unit:"м²",qty:"850",price:"1450"},
+      {name:"Подготовка основания",unit:"м²",qty:"850",price:"180"},
+      {name:"Доставка / логистика",unit:"услуга",qty:"1",price:"25000"}
+    ]
+  });
+  applySections();recalc();save();
+}
+
+/* ---------- PDF ---------- */
+function sanitize(s){return (s||"").replace(/[\\/:*?"<>|]+/g,"_").replace(/\s+/g,"_").slice(0,60);}
+async function downloadPDF(){
+  const kpno=($('[data-k=kpno]').textContent||"").trim().replace(/[^0-9A-Za-zА-Яа-я_-]/g,"");
+  const client=$('[data-k=client]').value||"";
+  const fname="КП_"+(kpno||todayISO().replace(/-/g,""))+(client?("_"+sanitize(client)):"")+".pdf";
+  if(typeof html2canvas==="undefined"||!window.jspdf){alert("Не удалось загрузить генератор PDF. Проверьте интернет и обновите страницу.");return;}
+  const btn=$("#btnPdf"),old=btn.textContent;btn.textContent="⏳ Готовлю PDF…";btn.disabled=true;
+  let holder=null;
+  try{
+    if(document.fonts&&document.fonts.ready){try{await document.fonts.ready;}catch(e){}}
+    // копия документа фиксированной ширины A4 (чтобы не поймать мобильную вёрстку)
+    holder=document.createElement('div');
+    holder.className='pdfexport';
+    holder.style.cssText='position:fixed;left:-10000px;top:0;';
+    const clone=$("#doc").cloneNode(true);
+    clone.removeAttribute('id');
+    clone.querySelectorAll('.ph-cap').forEach(c=>{if(!c.textContent.trim())c.remove();});
+    // поля ввода → статичный текст (html2canvas режет текст внутри input/select)
+    clone.querySelectorAll('input,select,textarea').forEach(el=>{
+      if(el.type==='checkbox'||el.type==='radio')return;
+      let txt='';
+      if(el.tagName==='SELECT'){const o=el.options[el.selectedIndex];txt=o?o.text:'';}
+      else txt=el.value||'';
+      const sp=document.createElement('span');
+      sp.className=el.className;
+      sp.textContent=txt;
+      const cs=getComputedStyle(el);
+      sp.style.display='inline-block';
+      sp.style.width=el.style.width||cs.width;
+      sp.style.textAlign=cs.textAlign;
+      sp.style.whiteSpace='normal';
+      sp.style.verticalAlign='middle';
+      el.parentNode.replaceChild(sp,el);
+    });
+    holder.appendChild(clone);
+    document.body.appendChild(holder);
+    // границы для разрыва (верх блоков — блок переносится целиком, текст не режется)
+    const hrect=holder.getBoundingClientRect();
+    const bset=new Set();
+    [...holder.firstElementChild.children].forEach(el=>{if(el.classList.contains('no-print'))return;const t=el.getBoundingClientRect().top-hrect.top;if(t>2)bset.add(t);});
+    holder.querySelectorAll('.parties .field,.adv .it,.benefits li,table.items thead,table.items tr,.totals .tr,.stages,.ph-card,.terms').forEach(el=>{const t=el.getBoundingClientRect().top-hrect.top;if(t>2)bset.add(t);});
+    const canvas=await html2canvas(holder,{scale:2,backgroundColor:'#ffffff',useCORS:true,imageTimeout:0,windowWidth:holder.offsetWidth,width:holder.offsetWidth});
+    const ratio=canvas.width/holder.offsetWidth;
+    const bounds=[...bset].map(t=>Math.round(t*ratio)).filter(t=>t>0&&t<canvas.height).sort((a,b)=>a-b);
+    document.body.removeChild(holder);holder=null;
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait',compress:true});
+    const pageW=210,pageH=297,margin=10;
+    const imgW=pageW-margin*2;
+    const pxPerMm=canvas.width/imgW;
+    const pageContentPx=Math.floor((pageH-margin*2)*pxPerMm);
+    let start=0,pageNo=0;
+    while(start<canvas.height&&pageNo<80){
+      const maxEnd=start+pageContentPx;
+      let end;
+      if(maxEnd>=canvas.height)end=canvas.height;
+      else{
+        let cut=0;
+        for(const b of bounds){if(b>start+60&&b<=maxEnd)cut=b;else if(b>maxEnd)break;}
+        end=cut>start?cut:maxEnd;
+      }
+      const sliceH=end-start;
+      const pc=document.createElement('canvas');pc.width=canvas.width;pc.height=sliceH;
+      const cx=pc.getContext('2d');cx.fillStyle="#fff";cx.fillRect(0,0,pc.width,pc.height);
+      cx.drawImage(canvas,0,start,canvas.width,sliceH,0,0,canvas.width,sliceH);
+      if(pageNo>0)pdf.addPage();
+      pdf.addImage(pc.toDataURL('image/jpeg',0.92),'JPEG',margin,margin,imgW,sliceH/pxPerMm);
+      start=end;pageNo++;
+    }
+    pdf.save(fname);
+  }catch(e){
+    if(holder&&holder.parentNode)document.body.removeChild(holder);
+    alert("Не удалось создать PDF: "+(e&&e.message?e.message:e));
+  }finally{
+    btn.textContent=old;btn.disabled=false;
+  }
+}
+
+/* ---------- init ---------- */
+loadMgrs();
+let loaded=false;
+try{const raw=localStorage.getItem(STORE);if(raw){loaded=apply(JSON.parse(raw));}}catch(e){}
+if(!loaded)setDefaults();
+renderMgrs();renderSecToggles();applySections();recalc();
+markGal("works");markGal("obj");
+wireDrop("works","#dropWorks","#fileWorks");
+wireDrop("obj","#dropObj","#fileObj");
+
+$("#btnAdd2").addEventListener('click',()=>{addRow();recalc();save();});
+$("#btnPdf").addEventListener('click',downloadPDF);
+$("#btnExample").addEventListener('click',loadExample);
+$("#btnMgrs").addEventListener('click',()=>{const p=$("#mgrPanel");p.style.display=p.style.display==="none"?"":"none";});
+$("#btnSecs").addEventListener('click',()=>{const p=$("#secPanel");p.style.display=p.style.display==="none"?"":"none";});
+$("#mgrAdd").addEventListener('click',addMgr);
+$("#mgrPhone").addEventListener('keydown',e=>{if(e.key==="Enter")addMgr();});
+$("#mgrName").addEventListener('keydown',e=>{if(e.key==="Enter")$("#mgrPhone").focus();});
+$("#mgrSelect").addEventListener('change',e=>{if(e.target.value)selectMgr(e.target.value);});
+$("#btnClear").addEventListener('click',()=>{if(!confirm("Очистить все поля и начать новое КП? (список менеджеров сохранится)"))return;localStorage.removeItem(STORE);currentMgr=null;sections={};$("#galWorks").innerHTML="";$("#galObj").innerHTML="";markGal("works");markGal("obj");setDefaults();renderSecToggles();applySections();renderMgrs();recalc();});
+["#tDisc","#tVat","#tVatOn","#fDate","#fValid"].forEach(s=>$(s).addEventListener('input',()=>{recalc();save();}));
+$$("[data-k]").forEach(el=>el.addEventListener('input',save));
+document.addEventListener('input',e=>{if(e.target.closest('#rows')){recalc();save();}});
+</script>
+</body>
+</html>
