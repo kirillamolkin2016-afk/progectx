@@ -24,7 +24,7 @@
   html,body{margin:0;padding:0}
   body{font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
   a{color:var(--link);text-decoration:none}
-  .wrap{max-width:900px;margin:0 auto;padding:20px 18px 120px;}
+  .wrap{max-width:920px;margin:0 auto;padding:20px 18px 120px;}
 
   .topbar{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
   .logo{width:46px;height:46px;border-radius:12px;flex:0 0 auto;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;letter-spacing:.5px;font-size:17px;box-shadow:0 4px 12px rgba(30,58,95,.3);}
@@ -44,6 +44,11 @@
   .btn--ghost{background:transparent;border-color:transparent;color:var(--muted);}
   .btn--ghost:hover{color:var(--primary);border-color:var(--line2);}
   .btn.sm{padding:6px 10px;font-size:12.5px;}
+
+  .seg{display:inline-flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden;}
+  .seg button{border:none;background:var(--surface);color:var(--muted);font-family:var(--font);font-size:13px;font-weight:700;padding:6px 12px;cursor:pointer;border-left:1px solid var(--line2);}
+  .seg button:first-child{border-left:none;}
+  .seg button.on{background:var(--primary);color:#fff;}
 
   .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;box-shadow:var(--shadow);margin-bottom:14px;}
   .panel h3{margin:0 0 12px;font-size:13px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;display:flex;align-items:center;gap:8px;}
@@ -67,7 +72,7 @@
   .company{display:flex;gap:14px;align-items:flex-start;}
   .company .mark{width:52px;height:52px;border-radius:12px;flex:0 0 auto;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;letter-spacing:.5px;}
   .company .cname{font-size:22px;font-weight:800;color:var(--primary);letter-spacing:-.02em;line-height:1;}
-  .company .ctag{font-size:12px;color:var(--muted);margin-top:5px;max-width:300px;line-height:1.4;}
+  .company .ctag{font-size:12px;color:var(--muted);margin-top:5px;max-width:320px;line-height:1.4;}
   .company .cinfo{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.6;}
   .docmeta{text-align:right;flex:0 0 auto;}
   .docmeta .h{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
@@ -81,7 +86,6 @@
   select.f{appearance:auto;}
   input.f::-webkit-outer-spin-button,input.f::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
 
-  /* editable rich text in the document */
   [contenteditable]{outline:none;}
   [contenteditable]:hover{background:rgba(0,153,255,.04);border-radius:4px;}
   [contenteditable]:focus{background:rgba(0,153,255,.07);border-radius:4px;box-shadow:0 0 0 3px rgba(0,153,255,.10);}
@@ -89,7 +93,6 @@
   .parties{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin:20px 0 8px;}
   .field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);margin-bottom:5px;}
 
-  /* selling sections */
   .sec{margin-top:24px;}
   .sec-h{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary);margin:0 0 12px;}
   .offer{margin-top:20px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;}
@@ -112,19 +115,26 @@
   .special .txt{font-size:14px;line-height:1.5;color:#EAF0F6;}
   .special .cta{margin-top:12px;font-size:15px;font-weight:700;color:#fff;border-top:1px solid rgba(255,255,255,.18);padding-top:12px;}
 
-  table.items{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;}
-  table.items th{background:var(--primary);color:#fff;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;padding:9px 8px;text-align:left;}
+  /* variants */
+  .variant{margin-top:12px;}
+  .variant-head{display:flex;align-items:center;gap:10px;margin:20px 0 6px;}
+  .variant-badge{background:var(--primary);color:#fff;font-size:11px;font-weight:800;padding:5px 11px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
+  .v-title{max-width:380px;}
+  .v-del{margin-left:auto;}
+  .table-wrap{overflow-x:auto;}
+  table.items{width:100%;border-collapse:collapse;margin-top:8px;font-size:12.5px;min-width:640px;}
+  table.items th{background:var(--primary);color:#fff;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.02em;padding:8px 6px;text-align:left;}
   table.items th.money,table.items th.qty{text-align:right;}
-  table.items td{border-bottom:1px solid var(--line);padding:5px 6px;vertical-align:middle;}
+  table.items td{border-bottom:1px solid var(--line);padding:4px 5px;vertical-align:middle;}
   table.items tr:last-child td{border-bottom:none;}
-  td.idx{color:var(--faint);font-family:var(--mono);font-size:12px;text-align:center;width:30px;}
-  td.sum{font-family:var(--mono);font-weight:600;text-align:right;white-space:nowrap;width:120px;}
-  .colw-unit{width:96px;} .colw-qty{width:78px;} .colw-price{width:120px;}
+  td.idx{color:var(--faint);font-family:var(--mono);font-size:11px;text-align:center;width:26px;}
+  td.sum{font-family:var(--mono);font-weight:600;text-align:right;white-space:nowrap;}
+  .colw-unit{width:74px;}
   .rm{border:none;background:transparent;color:var(--faint);cursor:pointer;font-size:17px;line-height:1;padding:2px 6px;border-radius:6px;}
   .rm:hover{color:#DC2626;background:#FEF2F2;}
   .addrow{margin-top:10px;}
 
-  .totals{margin-top:18px;margin-left:auto;width:360px;max-width:100%;}
+  .totals{margin-top:16px;margin-left:auto;width:360px;max-width:100%;}
   .totals .tr{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13.5px;}
   .totals .tr label{color:var(--muted);}
   .totals .tr .v{font-family:var(--mono);font-weight:600;}
@@ -132,13 +142,21 @@
   .totals .tr.grand{border-top:2px solid var(--primary);margin-top:6px;padding-top:12px;font-size:16px;font-weight:800;}
   .totals .tr.grand .v{color:var(--accent);font-size:18px;}
   .totals .inl{display:inline-flex;align-items:center;gap:6px;}
-  .totals .pct{width:64px;}
+  .totals .pct{width:60px;}
   .words{font-size:12.5px;color:var(--muted);margin-top:8px;font-style:italic;}
 
   .terms{margin-top:26px;}
   .terms h3{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--primary);margin:0 0 8px;}
-  textarea.f{resize:vertical;min-height:78px;line-height:1.55;}
   .terms-body{min-height:64px;line-height:1.6;}
+
+  /* signature + stamp */
+  .signblock .sign-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:6px;}
+  .sign-role{font-size:12.5px;color:var(--muted);}
+  .sign-name2{font-size:14px;font-weight:700;color:var(--ink);margin-top:3px;}
+  .sign-sub{font-size:12px;color:var(--muted);font-family:var(--mono);margin-top:2px;}
+  .stamp-slot{flex:0 0 auto;min-width:120px;text-align:center;}
+  .stamp-slot img.stamp{max-width:200px;max-height:160px;display:block;margin-left:auto;}
+  .stamp-hint{font-size:11px;color:var(--faint);}
 
   /* photo galleries */
   .dropzone{border:1.5px dashed var(--line2);border-radius:10px;padding:14px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;background:#FAFBFC;transition:border-color .12s,background .12s,color .12s;margin-bottom:10px;}
@@ -164,54 +182,44 @@
     .adv{grid-template-columns:1fr;}
     .stages{grid-template-columns:1fr 1fr;}
     .totals{width:100%;}
+    .signblock .sign-row{flex-direction:column;align-items:flex-start;}
+    .stamp-slot img.stamp{margin-left:0;}
   }
 
-  /* clean look for PDF export & print */
-  body.export .no-print,body.export .sec-hide{display:none !important;}
-  body.export .wrap{max-width:none;padding:0;}
-  body.export .doc{border:none;border-radius:0;box-shadow:none;padding:0;}
-  body.export .f{border-color:transparent !important;background:transparent !important;box-shadow:none !important;padding:2px 0 !important;}
-  body.export select.f{appearance:none;-webkit-appearance:none;}
-  body.export textarea.f{min-height:0;}
-  body.export [contenteditable]:hover,body.export [contenteditable]:focus{background:transparent !important;box-shadow:none !important;}
-  body.export .rm,body.export .addrow{display:none !important;}
-  body.export .stages .st,body.export .offer,body.export .special{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-
-  /* off-screen clone used for PDF generation */
+  /* off-screen clone for PDF */
   .pdfexport{width:794px;background:#fff;padding:32px 34px;}
   .pdfexport .no-print,.pdfexport .sec-hide{display:none !important;}
   .pdfexport .doc{border:none !important;border-radius:0 !important;box-shadow:none !important;padding:0 !important;}
   .pdfexport .f{border-color:transparent !important;background:transparent !important;box-shadow:none !important;padding:2px 0 !important;}
   .pdfexport select.f{appearance:none;-webkit-appearance:none;}
   .pdfexport [contenteditable]:hover,.pdfexport [contenteditable]:focus{background:transparent !important;box-shadow:none !important;}
-  .pdfexport .rm,.pdfexport .addrow{display:none !important;}
+  .pdfexport .rm,.pdfexport .addrow,.pdfexport .v-del{display:none !important;}
   .pdfexport .ph-cap:empty{display:none !important;}
   .pdfexport .empty-gal{display:none !important;}
   .pdfexport .terms-body{min-height:0;}
+  .pdfexport .table-wrap{overflow:visible;}
+  .pdfexport table.items{min-width:0;}
 
   @media print{
-    @page{size:A4;margin:14mm;}
+    @page{size:A4;margin:12mm;}
     body{background:#fff;}
     .wrap{max-width:none;padding:0;}
     .no-print,.sec-hide{display:none !important;}
-    .doc{border:none;border-radius:0;box-shadow:none;padding:0;}
+    .doc{border:none;box-shadow:none;padding:0;}
     .f{border-color:transparent !important;background:transparent !important;box-shadow:none !important;padding:2px 0 !important;}
     select.f{appearance:none;-webkit-appearance:none;}
-    textarea.f{min-height:0;}
-    [contenteditable]:hover,[contenteditable]:focus{background:transparent !important;box-shadow:none !important;}
-    table.items th,.offer,.special,.stages .st,.adv .chk,.benefits li::before,.ph-card{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .rm,.addrow{display:none !important;}
+    .table-wrap{overflow:visible;} table.items{min-width:0;}
+    table.items th,.offer,.special,.stages .st,.adv .chk,.benefits li::before,.ph-card,.variant-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .rm,.addrow,.v-del{display:none !important;}
     .ph-cap:empty{display:none !important;}
     .empty-gal{display:none !important;}
-    .terms-body{min-height:0;}
-    .sec{break-inside:avoid;}
+    .sec,.variant{break-inside:avoid;}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- Top bar -->
   <div class="topbar no-print">
     <div class="logo">HX</div>
     <div>
@@ -221,18 +229,18 @@
     <a class="back" href="index.html">← На портал</a>
   </div>
 
-  <!-- Managers panel -->
+  <!-- Managers -->
   <div class="panel no-print" id="mgrPanel" style="display:none">
     <h3>👤 Менеджеры</h3>
     <div class="mgr-add">
-      <div class="field"><label>Имя и фамилия</label><input class="f" id="mgrName" placeholder="напр. Еремеев Михаил"></div>
-      <div class="field"><label>Телефон</label><input class="f" id="mgrPhone" placeholder="+7 ___ ___-__-__"></div>
+      <div class="field"><label>Имя и фамилия</label><input class="f" id="mgrName" placeholder="напр. Ломакин Аристарх"></div>
+      <div class="field"><label>Телефон</label><input class="f" id="mgrPhone" placeholder="8 ___ ___ __ __"></div>
       <button class="btn btn--primary" id="mgrAdd">＋ Добавить</button>
     </div>
     <div class="mgr-list" id="mgrList"></div>
   </div>
 
-  <!-- Sections panel -->
+  <!-- Sections -->
   <div class="panel no-print" id="secPanel" style="display:none">
     <h3>🧩 Блоки КП <span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--faint);font-size:12px">— что показывать в документе</span></h3>
     <div class="sec-toggles" id="secToggles"></div>
@@ -240,10 +248,8 @@
 
   <!-- Toolbar -->
   <div class="toolbar no-print">
-    <div class="who">
-      <label>Кто вы?</label>
-      <select class="f mini" id="mgrSelect" style="width:190px"></select>
-    </div>
+    <div class="who"><label>Кто вы?</label><select class="f mini" id="mgrSelect" style="width:180px"></select></div>
+    <div class="who"><label>Вариантов</label><div class="seg" id="varSeg"><button data-n="1">1</button><button data-n="2">2</button><button data-n="3">3</button></div></div>
     <button class="btn sm" id="btnMgrs">👤 Менеджеры</button>
     <button class="btn sm" id="btnSecs">🧩 Блоки</button>
     <div class="grow"></div>
@@ -261,7 +267,7 @@
         <div>
           <div class="cname">Hide-X</div>
           <div class="ctag" contenteditable="true" data-k="ctag">Напыляемая теплоизоляция ППУ · полимочевина · гидроизоляция кровли и полов</div>
-          <div class="cinfo" contenteditable="true" data-k="cinfo">Тел.: +7 (___) ___-__-__ · e-mail: info@hide-x.ru<br>Сайт: hide-x.ru · ИНН/реквизиты: ___</div>
+          <div class="cinfo" contenteditable="true" data-k="cinfo">ООО «Хайд Икс» · ИНН 9724120965<br>Тел.: 8 926 999 70 08 · e-mail: Info@hide-x.ru · hide-x.ru</div>
         </div>
       </div>
       <div class="docmeta">
@@ -271,17 +277,17 @@
       </div>
     </div>
 
-    <!-- Offer hero -->
+    <!-- Offer -->
     <div class="offer" data-sec="offer">
       <div class="lead">Наше предложение</div>
-      <div class="txt" contenteditable="true" data-k="offer">Тёплая кровля без швов и мостиков холода — смонтируем за 2–3 дня, с гарантией 12 месяцев и фиксированной ценой.</div>
+      <div class="txt" contenteditable="true" data-k="offer">Тёплая кровля без швов и мостиков холода — смонтируем за 2–3 дня, с гарантией до 15 лет и фиксированной ценой.</div>
     </div>
 
     <!-- Advantages -->
     <div class="sec" data-sec="adv">
       <h3 class="sec-h">Почему Hide-X</h3>
       <div class="adv">
-        <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv1"><b>Гарантия 12 месяцев</b> на все выполненные работы</div></div>
+        <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv1"><b>Гарантия до 15 лет</b> на выполненные работы</div></div>
         <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv2"><b>Профессиональное оборудование</b> высокого давления — стабильное качество слоя</div></div>
         <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv3"><b>Более 100 000 м² выполнено</b> — опыт на объектах любой сложности</div></div>
         <div class="it"><div class="chk">✓</div><div class="tx" contenteditable="true" data-k="adv4"><b>Сертифицированные материалы</b>, бесплатный выезд и замер</div></div>
@@ -291,13 +297,25 @@
     <!-- Parties -->
     <div class="parties">
       <div class="field"><label>Клиент</label><input class="f" data-k="client" placeholder="ООО «Ромашка» / Иванов И.И."></div>
-      <div class="field"><label>Контакт / телефон клиента</label><input class="f" data-k="clientContact" placeholder="+7 ___ ___-__-__"></div>
-      <div class="field"><label>Объект / адрес</label><input class="f" data-k="object" placeholder="напр. Склад, г. Домодедово"></div>
+      <div class="field"><label>Контакт / телефон клиента</label><input class="f" data-k="clientContact" placeholder="8 ___ ___ __ __"></div>
       <div class="field"><label>Менеджер</label><input class="f" data-k="manager" placeholder="выберите себя вверху или введите имя"></div>
-      <div class="field"><label>Телефон менеджера</label><input class="f" data-k="managerPhone" placeholder="+7 ___ ___-__-__"></div>
+      <div class="field"><label>Телефон менеджера</label><input class="f" data-k="managerPhone" placeholder="8 ___ ___ __ __"></div>
     </div>
 
-    <!-- Benefits + technology -->
+    <!-- Object info -->
+    <div class="sec" data-sec="objinfo">
+      <h3 class="sec-h">Информация об объекте</h3>
+      <div class="parties" style="margin-top:0">
+        <div class="field"><label>Дата обращения</label><input type="date" class="f" data-k="reqDate"></div>
+        <div class="field"><label>Тип объекта</label><input class="f" data-k="objType" placeholder="напр. Гидроизоляция кровли склада"></div>
+        <div class="field"><label>Объект / адрес</label><input class="f" data-k="object" placeholder="напр. г. Домодедово, ул. Промышленная 5"></div>
+        <div class="field"><label>Площадь объекта</label><input class="f" data-k="objArea" placeholder="напр. 1000 м²"></div>
+        <div class="field"><label>Доступ к объекту</label><input class="f" data-k="objAccess" placeholder="напр. Свободный"></div>
+        <div class="field"><label>Наличие электроэнергии</label><input class="f" data-k="objPower" placeholder="напр. Есть 380"></div>
+      </div>
+    </div>
+
+    <!-- Benefits -->
     <div class="sec benefits" data-sec="benefits">
       <h3 class="sec-h">Что вы получаете</h3>
       <ul contenteditable="true" data-k="benefits">
@@ -308,52 +326,29 @@
       </ul>
     </div>
 
-    <!-- Items -->
-    <table class="items">
-      <thead>
-        <tr>
-          <th style="width:30px">№</th>
-          <th>Наименование работ / материалов</th>
-          <th class="colw-unit">Ед.</th>
-          <th class="qty colw-qty">Кол-во</th>
-          <th class="money colw-price">Цена, ₽</th>
-          <th class="money" style="width:120px">Сумма, ₽</th>
-          <th class="no-print" style="width:30px"></th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
-    <button class="btn addrow no-print" id="btnAdd2">＋ Добавить строку</button>
+    <!-- Variants (расчёт стоимости) -->
+    <div class="sec" data-sec="calc">
+      <h3 class="sec-h">Расчёт стоимости работ с учётом материалов</h3>
+      <div id="variants"></div>
+    </div>
 
     <datalist id="workList">
-      <option value="ППУ напыление кровли"></option>
-      <option value="ППУ утепление стен"></option>
-      <option value="ППУ утепление пола"></option>
-      <option value="Полимочевина, кровля"></option>
-      <option value="Полимочевина, пол"></option>
-      <option value="Гидроизоляция, полимочевина"></option>
+      <option value="Подготовка поверхности (очистка, обеспыливание, заделка швов герметиком)"></option>
+      <option value="Нанесение праймера по старой рулонной кровле"></option>
+      <option value="Нанесение праймера Поропрайм (материал + работа)"></option>
+      <option value="Устройство теплоизоляции ППУ методом напыления (Экотермикс 300, 35 кг/м³)"></option>
+      <option value="Устройство гидроизоляции кровли методом напыления, Riberg PM 2S 1,5–2 мм"></option>
+      <option value="Нанесение полимочевины Унигард Оптима (материал + работа)"></option>
       <option value="Полимочевина + Поропрайм"></option>
-      <option value="Материал ППУ (компоненты А+Б)"></option>
-      <option value="Материал полимочевина"></option>
-      <option value="Грунтовка / праймер"></option>
-      <option value="Подготовка основания"></option>
-      <option value="Аренда оборудования"></option>
-      <option value="Доставка / логистика"></option>
+      <option value="Пропенивание щелей и стыков примыкания"></option>
+      <option value="Окрашивание УФ-эмалью (серебро)"></option>
+      <option value="Установка аэраторов"></option>
+      <option value="Укрывные работы"></option>
+      <option value="Уборка паутины и грязи локально"></option>
+      <option value="Расходные материалы"></option>
+      <option value="Доставка материала и оборудования, проживание бригады"></option>
+      <option value="Доставка и подъём материала"></option>
     </datalist>
-
-    <div class="totals">
-      <div class="tr"><label>Итого по позициям</label><span class="v" id="tSub">0 ₽</span></div>
-      <div class="tr">
-        <label class="inl">Скидка <input class="f mini right pct" id="tDisc" type="number" min="0" max="100" step="0.5" value="0">%</label>
-        <span class="v" id="tDiscV">0 ₽</span>
-      </div>
-      <div class="tr sep">
-        <label class="inl"><input type="checkbox" id="tVatOn"> НДС <input class="f mini right pct" id="tVat" type="number" min="0" max="30" step="1" value="20">%</label>
-        <span class="v" id="tVatV">0 ₽</span>
-      </div>
-      <div class="tr grand"><label>К оплате</label><span class="v" id="tTotal">0 ₽</span></div>
-      <div class="words" id="tWords"></div>
-    </div>
 
     <!-- Stages -->
     <div class="sec" data-sec="stages">
@@ -366,20 +361,33 @@
       </div>
     </div>
 
-    <!-- Special offer + CTA -->
+    <!-- Special -->
     <div class="sec special" data-sec="special">
       <div class="lead">Спецпредложение</div>
-      <div class="txt" contenteditable="true" data-k="special">Цена в этом предложении зафиксирована до даты «действует до». При заключении договора в этот срок — выезд замерщика и подготовка сметы бесплатно.</div>
-      <div class="cta" contenteditable="true" data-k="cta">Готовы начать? Позвоните: +7 (___) ___-__-__ · info@hide-x.ru</div>
+      <div class="txt" contenteditable="true" data-k="special">Цены актуальны в течение месяца от даты в этом предложении. При заключении договора в этот срок — выезд замерщика и подготовка сметы бесплатно.</div>
+      <div class="cta" contenteditable="true" data-k="cta">Готовы начать? Позвоните: 8 926 999 70 08 · Info@hide-x.ru</div>
     </div>
 
     <!-- Conditions -->
     <div class="terms">
       <h3>Условия</h3>
-      <div class="f terms-body" contenteditable="true" data-k="terms">• Срок действия предложения: 14 календарных дней.<br>• Условия оплаты: предоплата 50%, остаток по факту выполнения работ.<br>• Сроки выполнения согласовываются после осмотра объекта.<br>• Гарантия на выполненные работы — 12 месяцев.</div>
+      <div class="f terms-body" contenteditable="true" data-k="terms">• Гарантия на выполненные работы: 5 лет (расширенная — до 15 лет).<br>• Цены актуальны в течение месяца от даты в коммерческом предложении.<br>• Условия оплаты: предоплата 50%, остаток по факту выполнения работ.<br>• Срок выполнения работ и состав бригады согласовываются после осмотра объекта.<br>• Все цены указаны с учётом НДС.</div>
     </div>
 
-    <!-- Object photos (в конце) -->
+    <!-- Signature + stamp -->
+    <div class="sec signblock" data-sec="sign">
+      <h3 class="sec-h">Подпись</h3>
+      <div class="sign-row">
+        <div class="sign-info">
+          <div class="sign-role" contenteditable="true" data-k="signRole">С уважением, коммерческий директор</div>
+          <div class="sign-name2" contenteditable="true" data-k="signName">Ломакин Аристарх</div>
+          <div class="sign-sub" contenteditable="true" data-k="signPhone">8 926 999 70 08 · Info@hide-x.ru</div>
+        </div>
+        <div class="stamp-slot" id="stampSlot"></div>
+      </div>
+    </div>
+
+    <!-- Object photos -->
     <div class="sec" data-sec="objphoto">
       <h3 class="sec-h">Фото объекта</h3>
       <div class="dropzone no-print" id="dropObj">📷 Нажмите или перетащите фото объекта клиента (замер / «до»)</div>
@@ -387,7 +395,7 @@
       <div class="gallery two" id="galObj"></div>
     </div>
 
-    <!-- Our works gallery (в конце) -->
+    <!-- Our works -->
     <div class="sec" data-sec="works">
       <h3 class="sec-h">Наши работы</h3>
       <div class="dropzone no-print" id="dropWorks">📷 Нажмите или перетащите фото реализованных объектов (2–6 шт.)</div>
@@ -396,63 +404,113 @@
     </div>
   </div>
 
-  <div class="hint no-print">Заполненное, список менеджеров и выбор блоков сохраняются в этом браузере. Кнопка «Скачать PDF» сразу скачивает готовый файл — без печати.</div>
+  <div class="hint no-print">Заполненное, менеджеры и выбор блоков сохраняются в этом браузере. «Скачать PDF» — сразу файл, без печати. Вариантов КП — до трёх (клиент выбирает).</div>
 </div>
 
 <script>
 "use strict";
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const STORE="hidex_kp_draft_v1";
+const STORE="hidex_kp_draft_v2";
 const MGRS="hidex_kp_managers_v1";
-const UNITS=["м²","м³","пог.м","шт","компл.","услуга","ед.","т","кг","л","час","смена"];
-const SECTIONS=[{k:"offer",n:"Оффер в шапке"},{k:"adv",n:"Преимущества"},{k:"objphoto",n:"Фото объекта"},{k:"benefits",n:"Что вы получаете"},{k:"stages",n:"Этапы работ"},{k:"works",n:"Наши работы"},{k:"special",n:"Спецпредложение + призыв"}];
-const rowsEl=$("#rows");
+const UNITS=["м²","м³","пог.м","шт","компл.","услуга","усл.ед","ед.","т","кг","л","час","смена"];
+const SECTIONS=[{k:"offer",n:"Оффер"},{k:"adv",n:"Преимущества"},{k:"objinfo",n:"Информация об объекте"},{k:"benefits",n:"Что вы получаете"},{k:"stages",n:"Этапы работ"},{k:"special",n:"Спецпредложение"},{k:"sign",n:"Подпись и печать"},{k:"objphoto",n:"Фото объекта"},{k:"works",n:"Наши работы"}];
 const fmt=n=>{n=Math.round((Number(n)||0)*100)/100;return n.toLocaleString("ru-RU",{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2})+" ₽";};
 
-/* ---------- rows ---------- */
+/* ---------- rows / variants ---------- */
 function unitSelectHTML(){return '<select class="f mini" data-c="unit">'+UNITS.map(u=>`<option value="${u}">${u}</option>`).join('')+'</select>';}
-function addRow(d={}){
+function makeRow(d={}){
   const tr=document.createElement("tr");
   tr.innerHTML='<td class="idx"></td>'+
     '<td><input class="f mini" data-c="name" list="workList" placeholder="Работа или материал"></td>'+
     '<td>'+unitSelectHTML()+'</td>'+
-    '<td><input class="f mini right" data-c="qty" type="number" min="0" step="any" placeholder="0"></td>'+
-    '<td><input class="f mini right" data-c="price" type="number" min="0" step="any" placeholder="0"></td>'+
+    '<td><input class="f mini" data-c="dens" placeholder="напр. 35 кг/м³" style="width:96px"></td>'+
+    '<td><input class="f mini right" data-c="qty" type="number" min="0" step="any" placeholder="0" style="width:62px"></td>'+
+    '<td><input class="f mini right" data-c="price" type="number" min="0" step="any" placeholder="0" style="width:82px"></td>'+
+    '<td><input class="f mini right" data-c="kpm" type="number" min="0" step="any" value="1" style="width:52px"></td>'+
     '<td class="sum" data-c="sum">0 ₽</td>'+
     '<td class="no-print"><button class="rm" title="Удалить строку">×</button></td>';
-  rowsEl.appendChild(tr);
   tr.querySelector('[data-c=name]').value=d.name||"";
-  const us=tr.querySelector('[data-c=unit]');
-  let uv=d.unit!=null&&d.unit!==""?d.unit:"м²";
-  if(![...us.options].some(o=>o.value===uv))us.add(new Option(uv,uv),0);
-  us.value=uv;
+  const us=tr.querySelector('[data-c=unit]');let uv=d.unit!=null&&d.unit!==""?d.unit:"м²";
+  if(![...us.options].some(o=>o.value===uv))us.add(new Option(uv,uv),0);us.value=uv;
+  tr.querySelector('[data-c=dens]').value=d.dens||"";
   if(d.qty!=null)tr.querySelector('[data-c=qty]').value=d.qty;
   if(d.price!=null)tr.querySelector('[data-c=price]').value=d.price;
-  tr.querySelector('.rm').addEventListener('click',()=>{tr.remove();if(!rowsEl.children.length)addRow();recalc();save();});
+  tr.querySelector('[data-c=kpm]').value=(d.kpm!=null&&d.kpm!=="")?d.kpm:1;
+  tr.querySelector('.rm').addEventListener('click',()=>{const tb=tr.parentNode;tr.remove();if(!tb.children.length)tb.appendChild(makeRow());recalcAll();save();});
   return tr;
 }
-function recalc(){
+function buildVariant(data){
+  data=data||{};
+  const v=document.createElement('div');v.className='variant';
+  v.innerHTML=
+    '<div class="variant-head">'+
+      '<span class="variant-badge">Вариант <span class="vnum"></span></span>'+
+      '<input class="f mini v-title" data-v="title" placeholder="название варианта, напр. Экотермикс 300">'+
+      '<button class="btn sm btn--ghost v-del no-print" title="Удалить вариант">× вариант</button>'+
+    '</div>'+
+    '<div class="table-wrap"><table class="items"><thead><tr>'+
+      '<th style="width:26px">№</th><th>Наименование работ / материалов</th>'+
+      '<th class="colw-unit">Ед.</th><th style="width:96px">Плотность</th>'+
+      '<th class="qty" style="width:62px">Кол-во</th><th class="money" style="width:82px">Цена, ₽</th>'+
+      '<th class="qty" style="width:52px">КПМ</th><th class="money" style="width:110px">Сумма, ₽</th>'+
+      '<th class="no-print" style="width:26px"></th>'+
+    '</tr></thead><tbody class="rows"></tbody></table></div>'+
+    '<button class="btn addrow no-print v-addrow">＋ Добавить строку</button>'+
+    '<div class="totals">'+
+      '<div class="tr"><label>Итого по позициям</label><span class="v tSub">0 ₽</span></div>'+
+      '<div class="tr"><label class="inl">Скидка <input class="f mini right pct v-disc" type="number" min="0" max="100" step="0.5" value="0">%</label><span class="v tDiscV">0 ₽</span></div>'+
+      '<div class="tr sep"><label class="inl"><input type="checkbox" class="v-vaton"> в т.ч. НДС <input class="f mini right pct v-vat" type="number" min="0" max="30" step="1" value="22">%</label><span class="v tVatV">—</span></div>'+
+      '<div class="tr grand"><label>К оплате</label><span class="v tTotal">0 ₽</span></div>'+
+      '<div class="words tWords"></div>'+
+    '</div>';
+  v.querySelector('[data-v=title]').value=data.title||"";
+  if(data.disc!=null)v.querySelector('.v-disc').value=data.disc;
+  if(data.vat!=null)v.querySelector('.v-vat').value=data.vat;
+  v.querySelector('.v-vaton').checked=!!data.vatOn;
+  const tb=v.querySelector('.rows');
+  (data.rows&&data.rows.length?data.rows:[{},{}]).forEach(r=>tb.appendChild(makeRow(r)));
+  v.querySelector('.v-addrow').addEventListener('click',()=>{tb.appendChild(makeRow());recalcAll();save();});
+  v.querySelector('.v-del').addEventListener('click',()=>{if($$('#variants .variant').length>1){v.remove();renumberVariants();recalcAll();save();}});
+  return v;
+}
+function renumberVariants(){
+  const vs=$$('#variants .variant');
+  const multi=vs.length>1;
+  vs.forEach((v,i)=>{v.querySelector('.vnum').textContent=i+1;v.querySelector('.variant-head').style.display=multi?'':'none';});
+  $$('#varSeg button').forEach(b=>b.classList.toggle('on',+b.dataset.n===vs.length));
+}
+function setVariantCount(n){
+  const cont=$("#variants");
+  let vs=$$('#variants .variant');
+  while(vs.length<n){cont.appendChild(buildVariant());vs=$$('#variants .variant');}
+  while(vs.length>n){cont.removeChild(cont.lastElementChild);vs=$$('#variants .variant');}
+  renumberVariants();recalcAll();save();
+}
+function recalcVariant(v){
   let sub=0;
-  $$("#rows tr").forEach((tr,i)=>{
+  $$('.rows tr',v).forEach((tr,i)=>{
     tr.querySelector('.idx').textContent=i+1;
     const q=Number(tr.querySelector('[data-c=qty]').value)||0;
     const p=Number(tr.querySelector('[data-c=price]').value)||0;
-    const s=q*p; sub+=s;
+    let k=Number(tr.querySelector('[data-c=kpm]').value);if(!k||k<=0)k=1;
+    const s=q*p*k; sub+=s;
     tr.querySelector('[data-c=sum]').textContent=fmt(s);
   });
-  const discPct=Number($("#tDisc").value)||0;
-  const discV=sub*discPct/100;
-  const afterDisc=sub-discV;
-  const vatOn=$("#tVatOn").checked;
-  const vatV=vatOn?afterDisc*(Number($("#tVat").value)||0)/100:0;
-  const total=afterDisc+vatV;
-  $("#tSub").textContent=fmt(sub);
-  $("#tDiscV").textContent="−"+fmt(discV);
-  $("#tVatV").textContent=(vatOn?"+":"")+fmt(vatV);
-  $("#tTotal").textContent=fmt(total);
-  $("#tWords").textContent=total>0?("Сумма прописью: "+rublesToWords(total)):"";
+  const disc=Number(v.querySelector('.v-disc').value)||0;
+  const discV=sub*disc/100, afterDisc=sub-discV;
+  const vatOn=v.querySelector('.v-vaton').checked;
+  const vatRate=Number(v.querySelector('.v-vat').value)||0;
+  // НДС уже включён в цены — не добавляем к сумме, только выделяем «в т.ч.»
+  const vatIncl=vatOn?afterDisc*vatRate/(100+vatRate):0;
+  const total=afterDisc;
+  v.querySelector('.tSub').textContent=fmt(sub);
+  v.querySelector('.tDiscV').textContent="−"+fmt(discV);
+  v.querySelector('.tVatV').textContent=vatOn?("в т.ч. "+fmt(vatIncl)):"—";
+  v.querySelector('.tTotal').textContent=fmt(total);
+  v.querySelector('.tWords').textContent=total>0?("Сумма прописью: "+rublesToWords(total)):"";
 }
+function recalcAll(){$$('#variants .variant').forEach(recalcVariant);}
 
 /* ---------- rubles in words ---------- */
 function rublesToWords(amount){
@@ -478,25 +536,24 @@ function intToWords(num,curForms,femaleUnits){
 }
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 
-/* ---------- sections visibility ---------- */
+/* ---------- sections ---------- */
 let sections={};
 function renderSecToggles(){
   const box=$("#secToggles");
   box.innerHTML=SECTIONS.map(s=>`<label><input type="checkbox" data-sec-chk="${s.k}" ${sections[s.k]===false?"":"checked"}> ${s.n}</label>`).join("");
-  $$("[data-sec-chk]",box).forEach(chk=>chk.addEventListener('change',()=>{
-    sections[chk.dataset.secChk]=chk.checked;applySections();save();
-  }));
+  $$("[data-sec-chk]",box).forEach(chk=>chk.addEventListener('change',()=>{sections[chk.dataset.secChk]=chk.checked;applySections();save();}));
 }
-function applySections(){
-  SECTIONS.forEach(s=>{
-    const el=document.querySelector('[data-sec="'+s.k+'"]');
-    if(el)el.style.display=(sections[s.k]===false)?"none":"";
-  });
-}
+function applySections(){SECTIONS.forEach(s=>{const el=document.querySelector('[data-sec="'+s.k+'"]');if(el)el.style.display=(sections[s.k]===false)?"none":"";});}
 
 /* ---------- managers ---------- */
 let managers=[],currentMgr=null;
-function loadMgrs(){try{managers=JSON.parse(localStorage.getItem(MGRS))||[];}catch(e){managers=[];}}
+function loadMgrs(){
+  const raw=localStorage.getItem(MGRS);
+  if(raw===null){ // первый запуск — засеваем реальных менеджеров
+    managers=[{id:"m_lomakin",name:"Ломакин Аристарх",phone:"8 926 999 70 08"},{id:"m_bely",name:"Белый Кирилл",phone:"8 922 782 47 42"}];
+    saveMgrs();
+  }else{try{managers=JSON.parse(raw)||[];}catch(e){managers=[];}}
+}
 function saveMgrs(){try{localStorage.setItem(MGRS,JSON.stringify(managers));}catch(e){}}
 function initials(name){return (name||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";}
 function renderMgrs(){
@@ -542,16 +599,10 @@ function compressImage(file,maxW,q,aspect){
     const rd=new FileReader();
     rd.onload=()=>{const img=new Image();img.onload=()=>{
       let sw=img.width,sh=img.height,sx=0,sy=0;
-      if(aspect){ // центр-кроп под нужную пропорцию, без искажения
-        const a=sw/sh;
-        if(a>aspect){const nw=Math.round(sh*aspect);sx=Math.round((sw-nw)/2);sw=nw;}
-        else{const nh=Math.round(sw/aspect);sy=Math.round((sh-nh)/2);sh=nh;}
-      }
-      let dw=sw,dh=sh;
-      if(dw>maxW){dh=Math.round(dh*maxW/dw);dw=maxW;}
+      if(aspect){const a=sw/sh;if(a>aspect){const nw=Math.round(sh*aspect);sx=Math.round((sw-nw)/2);sw=nw;}else{const nh=Math.round(sw/aspect);sy=Math.round((sh-nh)/2);sh=nh;}}
+      let dw=sw,dh=sh;if(dw>maxW){dh=Math.round(dh*maxW/dw);dw=maxW;}
       const c=document.createElement('canvas');c.width=dw;c.height=dh;
-      const ctx=c.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,dw,dh);
-      ctx.drawImage(img,sx,sy,sw,sh,0,0,dw,dh);
+      const ctx=c.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,dw,dh);ctx.drawImage(img,sx,sy,sw,sh,0,0,dw,dh);
       res(c.toDataURL('image/jpeg',q));
     };img.onerror=rej;img.src=rd.result;};
     rd.onerror=rej;rd.readAsDataURL(file);
@@ -561,26 +612,17 @@ function addPhotoCard(gal,src,cap){
   const wrap=$(GALS[gal].grid);
   const card=document.createElement('div');card.className='ph-card';
   card.innerHTML='<div class="ph-imgwrap"><img alt=""><button class="ph-rm no-print" title="Удалить">×</button></div><div class="ph-cap" contenteditable="true"></div>';
-  card.querySelector('img').src=src;
-  card.querySelector('.ph-cap').textContent=cap||"";
+  card.querySelector('img').src=src;card.querySelector('.ph-cap').textContent=cap||"";
   card.querySelector('.ph-rm').onclick=()=>{card.remove();markGal(gal);save();};
   card.querySelector('.ph-cap').addEventListener('input',save);
   wrap.appendChild(card);
 }
-function markGal(gal){
-  const sec=document.querySelector('[data-sec="'+GALS[gal].sec+'"]');
-  if(sec)sec.classList.toggle('empty-gal',$(GALS[gal].grid).children.length===0);
-}
+function markGal(gal){const sec=document.querySelector('[data-sec="'+GALS[gal].sec+'"]');if(sec)sec.classList.toggle('empty-gal',$(GALS[gal].grid).children.length===0);}
 async function handleFiles(gal,files){
-  for(const f of [...files]){
-    if(!/^image\//.test(f.type))continue;
-    try{const src=await compressImage(f,1000,0.75,4/3);addPhotoCard(gal,src,"");}catch(e){}
-  }
+  for(const f of [...files]){if(!/^image\//.test(f.type))continue;try{const src=await compressImage(f,1000,0.75,4/3);addPhotoCard(gal,src,"");}catch(e){}}
   markGal(gal);save();
 }
-function readGal(gal){
-  return $$(GALS[gal].grid+' .ph-card').map(c=>({src:c.querySelector('img').src,cap:c.querySelector('.ph-cap').textContent||""}));
-}
+function readGal(gal){return $$(GALS[gal].grid+' .ph-card').map(c=>({src:c.querySelector('img').src,cap:c.querySelector('.ph-cap').textContent||""}));}
 function wireDrop(gal,dropSel,inputSel){
   const dz=$(dropSel),inp=$(inputSel);
   dz.addEventListener('click',()=>inp.click());
@@ -590,24 +632,38 @@ function wireDrop(gal,dropSel,inputSel){
   dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer&&e.dataTransfer.files)handleFiles(gal,e.dataTransfer.files);});
 }
 
+/* ---------- stamp ---------- */
+function loadStamp(){
+  const im=new Image();
+  im.onload=()=>{const s=$("#stampSlot");if(s&&!s.querySelector('img')){const i=document.createElement('img');i.src='stamp.png';i.className='stamp';i.alt='печать и подпись';s.appendChild(i);}};
+  im.onerror=()=>{};
+  im.src='stamp.png?v=1';
+}
+
 /* ---------- persistence ---------- */
 function collect(){
-  const d={fields:{},rows:[],disc:$("#tDisc").value,vatOn:$("#tVatOn").checked,vat:$("#tVat").value,mgr:currentMgr,sections:sections,photos:{works:readGal("works"),obj:readGal("obj")}};
+  const d={fields:{},variants:[],mgr:currentMgr,sections:sections,photos:{works:readGal("works"),obj:readGal("obj")}};
   $$("[data-k]").forEach(el=>{const k=el.dataset.k;d.fields[k]=(el.tagName==="INPUT"||el.tagName==="TEXTAREA")?el.value:el.innerHTML;});
-  $$("#rows tr").forEach(tr=>{d.rows.push({name:tr.querySelector('[data-c=name]').value,unit:tr.querySelector('[data-c=unit]').value,qty:tr.querySelector('[data-c=qty]').value,price:tr.querySelector('[data-c=price]').value});});
+  $$('#variants .variant').forEach(v=>{
+    d.variants.push({
+      title:v.querySelector('[data-v=title]').value,
+      disc:v.querySelector('.v-disc').value,
+      vatOn:v.querySelector('.v-vaton').checked,
+      vat:v.querySelector('.v-vat').value,
+      rows:$$('.rows tr',v).map(tr=>({name:tr.querySelector('[data-c=name]').value,dens:tr.querySelector('[data-c=dens]').value,unit:tr.querySelector('[data-c=unit]').value,qty:tr.querySelector('[data-c=qty]').value,price:tr.querySelector('[data-c=price]').value,kpm:tr.querySelector('[data-c=kpm]').value}))
+    });
+  });
   return d;
 }
 let saveT=null;
-function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(STORE,JSON.stringify(collect()));const n=$("#savedNote");n.textContent="✓ сохранено";setTimeout(()=>{if(n.textContent==="✓ сохранено")n.textContent="";},1200);}catch(e){if(!quotaWarned){quotaWarned=true;alert("Фото занимают слишком много места в браузере — часть данных может не сохраниться. Уменьшите количество или размер фотографий.");}}},300);}
+function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(STORE,JSON.stringify(collect()));const n=$("#savedNote");n.textContent="✓ сохранено";setTimeout(()=>{if(n.textContent==="✓ сохранено")n.textContent="";},1200);}catch(e){if(!quotaWarned){quotaWarned=true;alert("Фото занимают слишком много места в браузере — часть данных может не сохраниться. Уменьшите количество/размер фото.");}}},300);}
 function apply(d){
   if(!d)return false;
   $$("[data-k]").forEach(el=>{const k=el.dataset.k;if(d.fields&&d.fields[k]!=null){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.value=d.fields[k];else el.innerHTML=d.fields[k];}});
-  if(d.disc!=null)$("#tDisc").value=d.disc;
-  if(d.vat!=null)$("#tVat").value=d.vat;
-  $("#tVatOn").checked=!!d.vatOn;
-  currentMgr=d.mgr||null;
-  sections=d.sections||{};
-  rowsEl.innerHTML="";(d.rows&&d.rows.length?d.rows:[{}]).forEach(r=>addRow(r));
+  currentMgr=d.mgr||null;sections=d.sections||{};
+  const cont=$("#variants");cont.innerHTML="";
+  (d.variants&&d.variants.length?d.variants:[{rows:[{},{}]}]).forEach(vd=>cont.appendChild(buildVariant(vd)));
+  renumberVariants();
   ["works","obj"].forEach(gal=>{$(GALS[gal].grid).innerHTML="";((d.photos&&d.photos[gal])||[]).forEach(p=>addPhotoCard(gal,p.src,p.cap));markGal(gal);});
   return true;
 }
@@ -616,29 +672,32 @@ function apply(d){
 function todayISO(){const t=new Date();return t.toISOString().slice(0,10);}
 function plusDaysISO(n){const t=new Date();t.setDate(t.getDate()+n);return t.toISOString().slice(0,10);}
 function setDefaults(){
-  $("#fDate").value=todayISO();$("#fValid").value=plusDaysISO(14);
+  $("#fDate").value=todayISO();$("#fValid").value=plusDaysISO(30);
   $('[data-k=kpno]').textContent=new Date().toISOString().slice(0,10).replace(/-/g,"");
-  rowsEl.innerHTML="";addRow({});addRow({});
+  const cont=$("#variants");cont.innerHTML="";cont.appendChild(buildVariant({rows:[{},{}]}));renumberVariants();
 }
 function loadExample(){
   apply({
     fields:{
-      kpno:new Date().toISOString().slice(0,10).replace(/-/g,""),date:todayISO(),valid:plusDaysISO(14),
-      client:"ООО «Ромашка»",clientContact:"+7 926 123-45-67",
-      object:"Склад, г. Домодедово, ул. Промышленная 5",
-      manager:managers[0]?managers[0].name:"Еремеев Михаил",
-      managerPhone:managers[0]?(managers[0].phone||""):"+7 900 111-22-33",
-      terms:"• Срок действия предложения: 14 календарных дней.<br>• Условия оплаты: предоплата 50%, остаток по факту.<br>• Сроки: 5 рабочих дней после согласования.<br>• Гарантия на работы — 12 месяцев."
+      kpno:new Date().toISOString().slice(0,10).replace(/-/g,""),date:todayISO(),valid:plusDaysISO(30),
+      client:"ООО «Ромашка»",clientContact:"8 926 123 45 67",
+      manager:(managers[0]?managers[0].name:"Ломакин Аристарх"),managerPhone:(managers[0]?(managers[0].phone||""):"8 926 999 70 08"),
+      reqDate:todayISO(),objType:"Гидроизоляция кровли складского помещения",object:"г. Домодедово, ул. Промышленная 5",
+      objArea:"1000 м²",objAccess:"Свободный",objPower:"Есть 380",
+      signRole:"С уважением, коммерческий директор",signName:"Ломакин Аристарх",signPhone:"8 926 999 70 08 · Info@hide-x.ru"
     },
-    disc:"5",vatOn:false,vat:"20",mgr:managers[0]?managers[0].id:null,sections:sections,
-    rows:[
-      {name:"ППУ напыление кровли",unit:"м²",qty:"850",price:"1200"},
-      {name:"Полимочевина, гидроизоляция",unit:"м²",qty:"850",price:"1450"},
-      {name:"Подготовка основания",unit:"м²",qty:"850",price:"180"},
-      {name:"Доставка / логистика",unit:"услуга",qty:"1",price:"25000"}
-    ]
+    mgr:(managers[0]?managers[0].id:null),sections:sections,
+    variants:[{title:"Полимочевина Riberg PM 2S",disc:"0",vatOn:true,vat:"22",rows:[
+      {name:"Подготовка поверхности (очистка, обеспыливание, заделка швов)",unit:"м²",qty:"1000",price:"300",kpm:"1"},
+      {name:"Установка аэраторов",unit:"шт",qty:"10",price:"8000",kpm:"1"},
+      {name:"Нанесение праймера по старой рулонной кровле",unit:"м²",qty:"1000",price:"380",kpm:"1"},
+      {name:"Устройство гидроизоляции кровли, Riberg PM 2S 1,5–2 мм",unit:"м²",dens:"—",qty:"1000",price:"3450",kpm:"1"},
+      {name:"Окрашивание УФ-эмалью (серебро)",unit:"м²",qty:"1000",price:"450",kpm:"1"},
+      {name:"Расходные материалы",unit:"усл.ед",qty:"1",price:"50000",kpm:"1"},
+      {name:"Доставка материала, проживание бригады",unit:"усл.ед",qty:"1",price:"200000",kpm:"1"}
+    ]}]
   });
-  applySections();recalc();save();
+  recalcAll();save();
 }
 
 /* ---------- PDF ---------- */
@@ -652,57 +711,34 @@ async function downloadPDF(){
   let holder=null;
   try{
     if(document.fonts&&document.fonts.ready){try{await document.fonts.ready;}catch(e){}}
-    // копия документа фиксированной ширины A4 (чтобы не поймать мобильную вёрстку)
-    holder=document.createElement('div');
-    holder.className='pdfexport';
-    holder.style.cssText='position:fixed;left:-10000px;top:0;';
-    const clone=$("#doc").cloneNode(true);
-    clone.removeAttribute('id');
+    holder=document.createElement('div');holder.className='pdfexport';holder.style.cssText='position:fixed;left:-10000px;top:0;';
+    const clone=$("#doc").cloneNode(true);clone.removeAttribute('id');
     clone.querySelectorAll('.ph-cap').forEach(c=>{if(!c.textContent.trim())c.remove();});
-    // поля ввода → статичный текст (html2canvas режет текст внутри input/select)
     clone.querySelectorAll('input,select,textarea').forEach(el=>{
       if(el.type==='checkbox'||el.type==='radio')return;
-      let txt='';
-      if(el.tagName==='SELECT'){const o=el.options[el.selectedIndex];txt=o?o.text:'';}
-      else txt=el.value||'';
-      const sp=document.createElement('span');
-      sp.className=el.className;
-      sp.textContent=txt;
-      const cs=getComputedStyle(el);
-      sp.style.display='inline-block';
-      sp.style.width=el.style.width||cs.width;
-      sp.style.textAlign=cs.textAlign;
-      sp.style.whiteSpace='normal';
-      sp.style.verticalAlign='middle';
+      let txt='';if(el.tagName==='SELECT'){const o=el.options[el.selectedIndex];txt=o?o.text:'';}else txt=el.value||'';
+      const sp=document.createElement('span');sp.className=el.className;sp.textContent=txt;
+      const cs=getComputedStyle(el);sp.style.display='inline-block';sp.style.width=el.style.width||cs.width;sp.style.textAlign=cs.textAlign;sp.style.whiteSpace='normal';sp.style.verticalAlign='middle';
       el.parentNode.replaceChild(sp,el);
     });
-    holder.appendChild(clone);
-    document.body.appendChild(holder);
-    // границы для разрыва (верх блоков — блок переносится целиком, текст не режется)
+    holder.appendChild(clone);document.body.appendChild(holder);
     const hrect=holder.getBoundingClientRect();
     const bset=new Set();
     [...holder.firstElementChild.children].forEach(el=>{if(el.classList.contains('no-print'))return;const t=el.getBoundingClientRect().top-hrect.top;if(t>2)bset.add(t);});
-    holder.querySelectorAll('.parties .field,.adv .it,.benefits li,table.items thead,table.items tr,.totals .tr,.stages,.ph-card,.terms').forEach(el=>{const t=el.getBoundingClientRect().top-hrect.top;if(t>2)bset.add(t);});
+    holder.querySelectorAll('.parties .field,.adv .it,.benefits li,.variant,.variant-head,table.items thead,table.items tr,.totals .tr,.stages,.ph-card,.terms,.signblock').forEach(el=>{const t=el.getBoundingClientRect().top-hrect.top;if(t>2)bset.add(t);});
     const canvas=await html2canvas(holder,{scale:2,backgroundColor:'#ffffff',useCORS:true,imageTimeout:0,windowWidth:holder.offsetWidth,width:holder.offsetWidth});
     const ratio=canvas.width/holder.offsetWidth;
     const bounds=[...bset].map(t=>Math.round(t*ratio)).filter(t=>t>0&&t<canvas.height).sort((a,b)=>a-b);
     document.body.removeChild(holder);holder=null;
     const {jsPDF}=window.jspdf;
     const pdf=new jsPDF({unit:'mm',format:'a4',orientation:'portrait',compress:true});
-    const pageW=210,pageH=297,margin=10;
-    const imgW=pageW-margin*2;
-    const pxPerMm=canvas.width/imgW;
-    const pageContentPx=Math.floor((pageH-margin*2)*pxPerMm);
+    const pageW=210,pageH=297,margin=10;const imgW=pageW-margin*2;
+    const pxPerMm=canvas.width/imgW;const pageContentPx=Math.floor((pageH-margin*2)*pxPerMm);
     let start=0,pageNo=0;
     while(start<canvas.height&&pageNo<80){
-      const maxEnd=start+pageContentPx;
-      let end;
+      const maxEnd=start+pageContentPx;let end;
       if(maxEnd>=canvas.height)end=canvas.height;
-      else{
-        let cut=0;
-        for(const b of bounds){if(b>start+60&&b<=maxEnd)cut=b;else if(b>maxEnd)break;}
-        end=cut>start?cut:maxEnd;
-      }
+      else{let cut=0;for(const b of bounds){if(b>start+60&&b<=maxEnd)cut=b;else if(b>maxEnd)break;}end=cut>start?cut:maxEnd;}
       const sliceH=end-start;
       const pc=document.createElement('canvas');pc.width=canvas.width;pc.height=sliceH;
       const cx=pc.getContext('2d');cx.fillStyle="#fff";cx.fillRect(0,0,pc.width,pc.height);
@@ -712,12 +748,8 @@ async function downloadPDF(){
       start=end;pageNo++;
     }
     pdf.save(fname);
-  }catch(e){
-    if(holder&&holder.parentNode)document.body.removeChild(holder);
-    alert("Не удалось создать PDF: "+(e&&e.message?e.message:e));
-  }finally{
-    btn.textContent=old;btn.disabled=false;
-  }
+  }catch(e){if(holder&&holder.parentNode)document.body.removeChild(holder);alert("Не удалось создать PDF: "+(e&&e.message?e.message:e));}
+  finally{btn.textContent=old;btn.disabled=false;}
 }
 
 /* ---------- init ---------- */
@@ -725,12 +757,11 @@ loadMgrs();
 let loaded=false;
 try{const raw=localStorage.getItem(STORE);if(raw){loaded=apply(JSON.parse(raw));}}catch(e){}
 if(!loaded)setDefaults();
-renderMgrs();renderSecToggles();applySections();recalc();
+renderMgrs();renderSecToggles();applySections();recalcAll();loadStamp();
 markGal("works");markGal("obj");
 wireDrop("works","#dropWorks","#fileWorks");
 wireDrop("obj","#dropObj","#fileObj");
 
-$("#btnAdd2").addEventListener('click',()=>{addRow();recalc();save();});
 $("#btnPdf").addEventListener('click',downloadPDF);
 $("#btnExample").addEventListener('click',loadExample);
 $("#btnMgrs").addEventListener('click',()=>{const p=$("#mgrPanel");p.style.display=p.style.display==="none"?"":"none";});
@@ -739,10 +770,12 @@ $("#mgrAdd").addEventListener('click',addMgr);
 $("#mgrPhone").addEventListener('keydown',e=>{if(e.key==="Enter")addMgr();});
 $("#mgrName").addEventListener('keydown',e=>{if(e.key==="Enter")$("#mgrPhone").focus();});
 $("#mgrSelect").addEventListener('change',e=>{if(e.target.value)selectMgr(e.target.value);});
-$("#btnClear").addEventListener('click',()=>{if(!confirm("Очистить все поля и начать новое КП? (список менеджеров сохранится)"))return;localStorage.removeItem(STORE);currentMgr=null;sections={};$("#galWorks").innerHTML="";$("#galObj").innerHTML="";markGal("works");markGal("obj");setDefaults();renderSecToggles();applySections();renderMgrs();recalc();});
-["#tDisc","#tVat","#tVatOn","#fDate","#fValid"].forEach(s=>$(s).addEventListener('input',()=>{recalc();save();}));
+$$('#varSeg button').forEach(b=>b.addEventListener('click',()=>setVariantCount(+b.dataset.n)));
+$("#btnClear").addEventListener('click',()=>{if(!confirm("Очистить все поля и начать новое КП? (список менеджеров сохранится)"))return;localStorage.removeItem(STORE);currentMgr=null;sections={};$("#galWorks").innerHTML="";$("#galObj").innerHTML="";markGal("works");markGal("obj");setDefaults();renderSecToggles();applySections();renderMgrs();recalcAll();});
+$("#fDate").addEventListener('input',save);$("#fValid").addEventListener('input',save);
 $$("[data-k]").forEach(el=>el.addEventListener('input',save));
-document.addEventListener('input',e=>{if(e.target.closest('#rows')){recalc();save();}});
+document.addEventListener('input',e=>{if(e.target.closest('#variants')){recalcAll();save();}});
+document.addEventListener('change',e=>{if(e.target.closest('#variants')){recalcAll();save();}});
 </script>
 </body>
 </html>
